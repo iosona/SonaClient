@@ -1,0 +1,55 @@
+appId: com.sona.app
+productName: "Sona"
+copyright: "Copyright © 2026 Sona"
+
+directories:
+  buildResources: build
+  output: dist
+
+asar: true
+asarUnpack:
+  - resources/**
+
+win:
+  executableName: "sona"
+  icon: build/icon.ico
+  target:
+    - target: nsis
+      arch:
+        - x64
+
+nsis:
+  artifactName: "sona-setup.${ext}"
+  shortcutName: "Sona"
+  uninstallDisplayName: "Sona"
+  createDesktopShortcut: always
+  oneClick: true
+  perMachine: false
+  installerIcon: build/icon.ico
+  uninstallerIcon: build/icon.ico
+
+linux:
+  executableName: "sona"
+  maintainer: "Sona"
+  category: Network;Chat;
+  icon: build/icon.png
+  target:
+    - AppImage
+    - deb
+
+mac:
+  category: public.app-category.utilities
+  icon: build/icon.icns
+  notarize: false
+  extendInfo:
+    NSCameraUsageDescription: Application requests access to the device's camera.
+    NSMicrophoneUsageDescription: Application requests access to the device's microphone.
+
+files:
+  - "out/**/*"
+  - "build/**/*"
+  - "package.json"
+  - "!**/*.map"
+  - "!**/node_modules/*/{README,LICENSE,test,dist/*.map}"
+
+publish: null
