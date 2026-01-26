@@ -1,6 +1,6 @@
 # Sona Client
 
-https://raw.githubusercontent.com/iosona/SonaClient/master/screens/screenshot.png
+![Sona Screen](https://raw.githubusercontent.com/iosona/SonaClient/refs/heads/master/screens/call_screen.jpg)
 
 Sona Client — это кроссплатформенное десктопное приложение, предназначенное для осуществления анонимных голосовых звонков. Создавайте приватные комнаты или присоединяйтесь к существующим по ID для общения без раскрытия личной информации.
 
