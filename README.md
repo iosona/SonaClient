@@ -44,7 +44,7 @@ Sona Client — это кроссплатформенное десктопное
 
 # Установка (для пользователей)
 
-### Sona Client доступен для Windows, macOS и Linux. Вы можете скачать последнюю версию на странице релизов (https://github.com/ВАШ_ПОЛЬЗОВАТЕЛЬ/ВАШ_РЕПОЗИТОРИЙ/releases) (замените ссылку на актуальную).
+### Sona Client доступен для Windows, macOS и Linux. Вы можете скачать последнюю версию на странице релизов https://github.com/iosona/SonaClient/releases
 
 # Поддерживаемые платформы:
 #### •  Windows: Sona-Setup-1.0.0.exe
