@@ -39,6 +39,7 @@ import ConnectionLostModal from '@renderer/components/ConnectionLostModal';
 import SettingsModal from '@renderer/components/SettingsModal';
 import { logger } from '@renderer/logger';
 import { ChatPanel } from '@renderer/components/ChatPanel';
+import { useCallTimer } from '@renderer/hooks/useCallTimer';
 
 const CallScreen: React.FC = () => {
   const { 
@@ -63,6 +64,7 @@ const CallScreen: React.FC = () => {
   const screenSelector = useModal();
   const [isMessage, setIsMessage] = useState<boolean>(false);
   const connectionLostModal = useModal();
+  const callTime = useCallTimer(true);
   const {
     handleDisconnect, 
     handleJoin, 
@@ -276,6 +278,9 @@ const CallScreen: React.FC = () => {
                 <Box component="span" sx={{ color: 'rgba(255,255,255,0.4)', ml: 1 }}>{clients.length}</Box>
               </Typography>
             </Stack>
+            <Typography color="textDisabled">
+              { callTime }
+            </Typography>
           </Box>
           <Container maxWidth={false} sx={{ 
             flex: 1, 

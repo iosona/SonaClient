@@ -1,6 +1,7 @@
-import { Paper, Avatar, Typography, keyframes, PaperProps, Box } from "@mui/material";
+import { Paper, Avatar, Typography, keyframes, PaperProps, Box, Link } from "@mui/material";
 import { UserData } from "@renderer/types";
 import { getAvatarSrcById, getHexColorByUsername } from "@renderer/utils";
+import Linkify from "linkify-react";
 import { FC, useEffect, useRef } from "react";
 
 const slideUp = keyframes`
@@ -43,6 +44,24 @@ const Message: FC<MessageProps> = ({
     }, []);
 
     const userName = userData?.userName || "Аноним"
+
+    const options = {
+        attributes: {
+            onClick: (event) => {
+                    event.preventDefault();
+                    const url = event.currentTarget.href;
+                    window.api.openUrl(url);
+                }
+            },
+        render: ({ attributes, content }) => {
+            const { href, ...props } = attributes;
+            return (
+                <Link href={href} {...props}>
+                    {content}
+                </Link>
+            );
+        }
+    };
 
     return (
         <Paper
@@ -100,10 +119,13 @@ const Message: FC<MessageProps> = ({
                         color: 'rgba(255, 255, 255, 0.85)',
                         wordBreak: 'break-word',
                         lineHeight: 1.4,
-                        letterSpacing: '0.2px'
+                        letterSpacing: '0.2px',
+                        userSelect: 'text'
                     }}
                 >
-                    { message }
+                    <Linkify options={options}>
+                        { message }
+                    </Linkify>
                 </Typography>
             </Box>
         </Paper>

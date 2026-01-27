@@ -1,4 +1,4 @@
-import { contextBridge, ipcRenderer } from 'electron'
+import { contextBridge, ipcRenderer, shell } from 'electron'
 
 const api = {
   minimize: () => ipcRenderer.send('minimize'),
@@ -10,7 +10,8 @@ const api = {
     types: ['window', 'screen'],
     thumbnailSize: { width: 150, height: 100 }
   }),
-  sendNotify: (title: string, body: string) => ipcRenderer.send('notify', title, body)
+  sendNotify: (title: string, body: string) => ipcRenderer.send('notify', title, body),
+  openUrl: (url: string) => shell.openExternal(url)
 }
 
 if (process.contextIsolated) {

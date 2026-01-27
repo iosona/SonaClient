@@ -3,7 +3,7 @@ productName: "Sona"
 copyright: "Copyright © 2026 Sona"
 
 directories:
-  buildResources: build
+  buildResources: resources
   output: dist
 
 asar: true
@@ -12,7 +12,7 @@ asarUnpack:
 
 win:
   executableName: "sona"
-  icon: build/icon.ico
+  icon: resources/sona.ico
   target:
     - target: nsis
       arch:
@@ -25,21 +25,20 @@ nsis:
   createDesktopShortcut: always
   oneClick: true
   perMachine: false
-  installerIcon: build/icon.ico
-  uninstallerIcon: build/icon.ico
+  installerIcon: resources/sona.ico
+  uninstallerIcon: resources/sona.ico
 
 linux:
   executableName: "sona"
   maintainer: "Sona"
   category: Network;Chat;
-  icon: build/icon.png
+  icon: resources/sona.png
   target:
     - AppImage
-    - deb
 
 mac:
   category: public.app-category.utilities
-  icon: build/icon.icns
+  icon: resources/icon.icns
   notarize: false
   extendInfo:
     NSCameraUsageDescription: Application requests access to the device's camera.
@@ -48,8 +47,12 @@ mac:
 files:
   - "out/**/*"
   - "build/**/*"
+  - "resources/**/*"
   - "package.json"
   - "!**/*.map"
   - "!**/node_modules/*/{README,LICENSE,test,dist/*.map}"
 
-publish: null
+publish:
+  provider: github
+  owner: iosona
+  repo: SonaClient

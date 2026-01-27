@@ -5,6 +5,7 @@ import { getContentHash } from './security';
 import { showNotify } from './notify';
 import { chmodSync, copyFileSync, existsSync, writeFileSync } from 'fs';
 import path from 'path';
+import { setupUpdater } from './updater';
 
 let mainWindow: BrowserWindow;
 let displayId: string | null = null;
@@ -152,6 +153,7 @@ async function createWindow() {
 
 app.whenReady().then(async () => {
   integrateAppImage();
+  setupUpdater();
 
   if (process.platform === 'win32') {
     electronApp.setAppUserModelId('com.sona.app')

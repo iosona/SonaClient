@@ -8,6 +8,7 @@ export interface Api {
   getHash: () => Promise<string>;
   sendNotify: (title: string, body: string) => void;
   getScreenSources: () => Promise<Electron.DesktopCapturerSource[]>;
+  openUrl: (url: string) => void;
 }
 
 export interface SysInfo {
