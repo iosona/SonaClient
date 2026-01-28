@@ -2,124 +2,121 @@
 
 ![Sona Screen](https://github.com/iosona/SonaClient/blob/main/screens/call_screen.jpg?raw=true)
 
-Sona Client — это кроссплатформенное десктопное приложение, предназначенное для осуществления анонимных голосовых звонков. Создавайте приватные комнаты или присоединяйтесь к существующим по ID для общения без раскрытия личной информации.
+Sona Client is a cross-platform desktop application designed for anonymous voice calls. Create private rooms or join existing ones by ID to communicate without revealing personal information.
 
-# Особенности
+# Features
 
-#### •  Анонимность: Сосредоточьтесь на общении, не беспокоясь о своей личности.
+#### • Anonymity: Focus on communication without worrying about your identity.
 
-#### •  Простой интерфейс: Интуитивно понятный дизайн для быстрого создания и присоединения к звонкам.
+#### • Simple interface: Intuitive design for quickly creating and joining calls.
 
-#### •  Создание комнат: Легко инициируйте новую сессию звонка.
+#### • Room creation: Easily initiate a new call session.
 
-#### •  Присоединение по ID: Подключайтесь к существующим комнатам, используя уникальный идентификатор.
+#### • Join by ID: Connect to existing rooms using a unique ID.
 
-#### •  Кроссплатформенность: Работает на Windows, macOS и Linux (благодаря Electron).
+#### • Cross-platform: Works on Windows, macOS, and Linux (thanks to Electron).
 
-#### •  Статус подключения: Визуальный индикатор состояния соединения.
+#### • Connection Status: A visual indicator of the connection status.
 
+# How to Use
 
-# Как использовать
+### 1. Create a Room:
 
-### 1. Создать комнату:
-    
-    •  Нажмите кнопку + Создать комнату.
+• Click the "Create Room" button.
 
-    • Приложение автоматически сгенерирует уникальный ID комнаты. Поделитесь этим ID с теми, кто должен присоединиться.
+• The app will automatically generate a unique room ID. Share this ID with anyone who needs to join.
 
-    •  После создания комнаты вы автоматически будете подключены к ней.
+• Once the room is created, you will be automatically connected to it.
 
+### 2. Join the Room:
 
-### 2. Присоединиться к комнате:
-  
-    •  Введите полученный ID комнаты в поле Введите ID.
-  
-    •  Нажмите кнопку Присоединиться.
-  
-    •  После успешного подключения вы сможете начать общение.
+• Enter the received room ID in the "Enter ID" field.
 
-### 3. Статус подключения:
-  
-    •  Индикатор в левом верхнем углу будет показывать текущий статус подключения (например, "Подключение...").
+• Click the "Join" button.
 
-# Установка (для пользователей)
+• Once successfully connected, you can start chatting.
 
-### Sona Client доступен для Windows, macOS и Linux. Вы можете скачать последнюю версию на странице релизов https://github.com/iosona/SonaClient/releases
+### 3. Connection Status:
 
-# Поддерживаемые платформы:
-#### •  Windows: Sona-Setup-1.0.0.exe
+• The indicator in the upper left corner will show the current connection status (e.g., "Connecting...").
 
-#### •  Linux: Sona-1.0.0.AppImage
+# Installation (for users)
 
-# Сборка из исходников (для разработчиков)
+### Sona Client is available for Windows, macOS, and Linux. You can download the latest version from the releases page: https://github.com/iosona/SonaClient/releases
 
-#### Для сборки и запуска Sona Client из исходного кода следуйте этим инструкциям.
+# Supported platforms:
+#### • Windows: sona-setup.exe
 
-### Требования
+#### • Linux: Sona.AppImage
 
-#### •  Node.js (рекомендуется LTS-версия)
-#### •  npm (поставляется с Node.js) или Yarn
+# Building from source (for developers)
 
-## Шаги
+#### To build and run Sona Client from source, follow these instructions.
 
-## 1. Клонируйте репозиторий:
-  
+### Requirements
+
+#### • Node.js (LTS version recommended)
+#### • npm (comes with Node.js) or Yarn
+
+## Steps
+
+## 1. Clone the repository:
+
 ```
-  git clone https://github.com/iosona/SonaClient
-  cd sona
+git clone https://github.com/iosona/SonaClient
+cd sona
 ```
 
-## 2. Установите зависимости:
-  
-```
-  npm install
-  # или
-  yarn install
-```
-  Скрипт postinstall автоматически установит зависимости для Electron Builder.
+## 2. Install dependencies:
 
-## 3. Запуск в режиме разработки:
-  
 ```
-  npm run dev
+npm install
+# or
+yarn install
 ```
+The postinstall script will automatically install dependencies for Electron Builder.
 
-## 4. Сборка для продакшена:
-  
+## 3. Run in development mode:
+
 ```
-  npm run build
+npm run dev
 ```
 
-## 5. Сборка для конкретных платформ:
-  •  Windows:
-    
+## 4. Build for production:
+
 ```
-    npm run build:win
-```
-  •  macOS: 
-```
-    npm run build:mac
-```
-  •  Linux:
-```
-    npm run build:linux
+npm run build
 ```
 
-## 6. Другие скрипты:
-####  •  npm run format: Отформатировать код с помощью Prettier.
-####  •  npm run lint: Проверить код на ошибки с помощью ESLint.
-####  •  npm run typecheck: Проверить типы TypeScript для Node.js и веб-части.
-####  •  npm run start: Запустить предварительный просмотр собранного приложения.
-####  •  npm run build:unpack: Собрать распакованную версию приложения.
+## 5. Build for specific platforms:
+• Windows:
 
-# Используемые технологии
+```
+npm run build:win
+```
+• macOS:
+```
+npm run build:mac
+```
+• Linux:
+```
+npm run build:linux
+```
 
-#### •  Electron: Фреймворк для создания кроссплатформенных десктопных приложений с использованием веб-технологий.
+## 6. Other scripts:
+#### • npm run format: Format code with Prettier.
+#### • npm run lint: Check code for errors with ESLint.
+#### • npm run typecheck: Check TypeScript types for Node.js and the web part.
+#### • npm run start: Run a preview of the built application. #### • npm run build:unpack: Build the unpacked version of the application.
 
-#### •  Electron Vite: Инструмент для быстрой разработки Electron-приложений.
+# Technologies Used
 
-#### •  Electron Builder: Инструмент для упаковки и сборки Electron-приложений для различных платформ.
+#### • Electron: A framework for creating cross-platform desktop applications using web technologies.
 
-#### •  TypeScript: Язык программирования с типизацией для повышения надежности кода.
+#### • Electron Vite: A tool for rapidly developing Electron applications.
 
-#### •  Node.js: Среда выполнения для JavaScript на стороне сервера (и в Electron).
+#### • Electron Builder: A tool for packaging and building Electron applications for various platforms.
+
+#### • TypeScript: A programming language with typing for increased code reliability.
+
+#### • Node.js: A runtime environment for server-side JavaScript (and in Electron).

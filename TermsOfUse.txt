@@ -1,17 +1,43 @@
-Условия использования (Terms of Service)
+Terms of Service / Условия использования
 
-Используя приложение Sona, вы соглашаетесь со следующими положениями:
-1.1. Статус сервиса
-    Sona — это инструмент для связи, предоставляемый на условиях «как есть» (as is). Разработчики не гарантируют 100% доступность сервиса в любое время.
+[EN] English Version
+    By using the Sona application, you enter into a digital handshake with us and agree to the following terms. We’ve kept this simple because we value your time as much as your privacy.
+    1.1. Service Philosophy & Status
+        "As Is" Commitment: Sona is a cutting-edge communication tool provided on an "as is" and "as available" basis. While we strive for 24/7 uptime and flawless connectivity, we don’t make empty promises of 100% availability.
+        Independence: We are an independent team. We don't answer to advertisers or data brokers, which allows us to prioritize your user experience over corporate profits.
 
-1.2. Правила поведения
-    Мы не ограничиваем темы ваших разговоров и не модерируем частные комнаты. Однако вы обязуетесь:
-    Не использовать приложение для совершения противоправных действий, нарушающих законодательство вашей страны.
-    Не пытаться взломать инфраструктуру приложения или мешать работе других пользователей.
+    1.2. Code of Conduct & Freedom of Speech
+        We believe in a free internet. We do not monitor, moderate, or censor your private rooms. However, by using Sona, you agree:
+        Lawful Use: Not to use the app for illegal activities that violate the laws of your jurisdiction.
+        Respect the Tech: Not to attempt to breach our infrastructure, reverse-engineer the app, or disrupt the experience for other users. Don't be a hacker; be a user.
 
-1.3. Ответственность
-    Контент: Вы несете полную ответственность за содержание ваших разговоров и за тех, кому вы передаете ID комнаты.
-    Безопасность: Разработчики Sona не несут ответственности за любые прямые или косвенные убытки, возникшие в результате использования или невозможности использования приложения.
+    1.3 Responsibility & Shield of Liability
+    Your Content, Your Rules: You are solely responsible for your conversations and the security of your Room IDs. Treat your Room ID like a physical key—if you give it away, you’re letting someone into your house.
+    Liability Limitation: To the maximum extent permitted by law, Sona and its creators shall not be liable for any direct, indirect, or incidental damages resulting from your use (or inability to use) the service. We provide the bridge; you decide how to cross it.
 
-1.4. Изменения
-    Мы оставляем за собой право обновлять данные условия. Продолжение использования приложения после изменений означает ваше согласие с новой редакцией.
+    1.4. Zero Exploitation Policy
+        Unlike "free" apps that turn you into the product, Sona does not exploit your data. We don't sell your habits, we don't track your location, and we never will. Our mission is to provide a clean, secure channel for human connection.
+
+    1.5. Evolution of Terms
+        We reserve the right to update these terms as Sona evolves. Your continued use of the app after any changes constitutes your "high-five" to the new version.
+
+[RU] Русская версия
+    Используя приложение Sona, вы вступаете с нами в «цифровое рукопожатие» и соглашаетесь со следующими положениями. Мы постарались изложить их просто, потому что ценим ваше время так же высоко, как и вашу приватность.
+    1.1. Статус и философия сервиса
+        Принцип «Как есть»: Sona — это передовой инструмент для связи, предоставляемый на условиях «as is». Мы стремимся к безупречной работе 24/7, но не даем пустых обещаний о 100% доступности в любой момент времени.
+        Независимость: Мы — независимая команда. Мы не подчиняемся рекламодателям или дата-брокерам, что позволяет нам ставить интересы пользователя выше корпоративной прибыли.
+
+    1.2. Правила поведения и свобода общения
+        Мы верим в свободный интернет. Мы не отслеживаем, не модерируем и не подвергаем цензуре ваши частные комнаты. Однако, используя Sona, вы обязуетесь:
+        Законность: Не использовать приложение для совершения противоправных действий, нарушающих законодательство вашей страны.
+        Уважение к технологиям: Не пытаться взломать инфраструктуру, не проводить реверс-инжиниринг и не мешать другим пользователям.
+
+    1.3. Ответственность и ограничение обязательств
+        Ваш контент — ваша ответственность: Вы несете полную ответственность за содержание ваших разговоров и за тех, кому вы передаете ID комнаты. Относитесь к ID комнаты как к физическому ключу от квартиры.
+        Ограничение ответственности: Разработчики Sona не несут ответственности за любые прямые или косвенные убытки, возникшие в результате использования или невозможности использования приложения. Мы строим мост, а как по нему идти — решать вам.
+
+    1.4. Политика против эксплуатации данных
+        В отличие от «бесплатных» приложений, которые превращают вас в товар, Sona не эксплуатирует ваши данные. Мы не продаем ваши привычки, не отслеживаем ваше местоположение и никогда не будем этого делать. Наша миссия — чистый и безопасный канал для человеческого общения.
+
+    1.5. Изменения условий
+        Мы оставляем за собой право обновлять данные условия по мере развития Sona. Продолжение использования приложения после изменений означает ваше согласие с новой редакцией.
