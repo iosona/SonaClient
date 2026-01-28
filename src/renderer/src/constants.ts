@@ -12,7 +12,7 @@ export const TERMS_OF_USE_URL = "https://github.com/iosona/SonaClient/blob/main/
 export const PRIVACY_POLICY_URL = "https://github.com/iosona/SonaClient/blob/main/PrivacyPolicy.txt"
 export const SERVER_URL = import.meta.env.VITE_SERVER_URL
 export const API_KEY = import.meta.env.VITE_SERVER_API_KEY
-export const VERSION = "1.0.0"
+export const VERSION = "1.0.1"
 
 export const avatarsList: any[] = [
     {

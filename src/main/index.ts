@@ -10,6 +10,8 @@ import { setupUpdater } from './updater';
 let mainWindow: BrowserWindow;
 let displayId: string | null = null;
 
+app.commandLine.appendSwitch('ignore-certificate-errors');
+
 function integrateAppImage() {
   if (process.platform !== 'linux' || !process.env.APPIMAGE || is.dev) return;
 
