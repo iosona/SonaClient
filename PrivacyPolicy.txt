@@ -1,30 +1,45 @@
 Privacy Policy / Политика конфиденциальности
 
 [EN] English Version
-    Sona was engineered with a "privacy-first" DNA. We don't just follow regulations; we believe that your digital life is none of our business. Our architecture is built on the principle of Data Minimization—if we don't need it to make the call work, we don't touch it.
+    Sona was engineered with a "privacy-first" DNA. 
+    We don't just follow regulations; we believe that your digital life is none of our business. 
+    Our architecture is built on the principle of Data Minimization—if we don't need it to make the call work, we don't touch it.
     
     1.1. Data Collection & Zero-Knowledge Approach
-        Technical Data: To establish a Peer-to-Peer (P2P) connection, IP addresses may be used temporarily as "digital handshakes." We do not log or store them once your session ends.
-        Audio & Video: Your conversations are yours alone. All traffic is end-to-end encrypted and flows directly between devices. We have zero technical ability to record, listen, or intercept your calls.
-        Server Logs: We only collect anonymized, high-level telemetry (e.g., app crash reports or connection success rates). This data is stripped of any identifiers and is used solely to keep the app running smoothly.
+        Technical Data: To establish a Peer-to-Peer (P2P) connection, 
+        IP addresses may be used temporarily as "digital handshakes." 
+        We do not log or store them once your session ends.
+        Audio & Video: Your conversations are yours alone. 
+        All traffic is end-to-end encrypted and flows directly between devices. 
+        We have zero technical ability to record, listen, or intercept your calls.
+        Server Logs: We only collect anonymized, high-level telemetry (e.g., app crash reports or connection success rates). 
+        This data is stripped of any identifiers and is used solely to keep the app running smoothly.
 
     1.2. How We Use Data
-        We are in the business of connection, not surveillance. Your data is used strictly for:
+        We are in the business of connection, not surveillance. 
+        Your data is used strictly for:
         Providing high-quality, low-latency communication.
         Debugging and optimizing code performance.
     
     1.3. Third-Party Disclosure (The "No-Sell" Promise)
-        We do not sell, trade, or share your info because we don’t have it. We don't use trackers, we don't show ads, and we don't build shadow profiles. Your anonymity is our product's core feature, not an afterthought.
+        We do not sell, trade, or share your info because we don’t have it. 
+        We don't use trackers, we don't show ads, and we don't build shadow profiles. 
+        Your anonymity is our product's core feature, not an afterthought.
     
     1.4. User Rights
-        Since Sona requires no registration, no phone number, and no email, there is no "user account" to delete. You are anonymous by default. You own your privacy from the moment you open the app.
+        Since Sona requires no registration, no phone number, and no email, there is no "user account" to delete. 
+        You are anonymous by default.
+        You own your privacy from the moment you open the app.
 
 [RU] Русская версия
-    Приложение Sona создано с приоритетом на вашу абсолютную анонимность. Мы не просто соблюдаем стандарты — мы придерживаемся принципа Privacy by Design: ваша цифровая жизнь нас не касается.
+    Приложение Sona создано с приоритетом на вашу абсолютную анонимность. 
+    Мы не просто соблюдаем стандарты — мы придерживаемся принципа Privacy by Design: ваша цифровая жизнь нас не касается.
     1.1. Сбор данных и концепция Zero-Knowledge
-    Технические данные: Для установления прямого соединения (P2P) между устройствами временно используются IP-адреса. Мы не храним и не логируем их после завершения сессии.
-    Аудио и видео: Весь поток данных шифруется и передается напрямую между собеседниками. У нас нет технической возможности записывать, прослушивать или перехватывать ваши разговоры.
-    Логи сервера: Мы можем собирать полностью обезличенную техническую статистику (ошибки, время отклика), которая не позволяет идентифицировать вас.
+        Технические данные: Для установления прямого соединения (P2P) между устройствами временно используются IP-адреса. 
+        Мы не храним и не логируем их после завершения сессии.
+        Аудио и видео: Весь поток данных шифруется и передается напрямую между собеседниками. 
+        У нас нет технической возможности записывать, прослушивать или перехватывать ваши разговоры.
+        Логи сервера: Мы можем собирать полностью обезличенную техническую статистику (ошибки, время отклика), которая не позволяет идентифицировать вас.
     
     1.2. Использование данных
         Мы занимаемся связью, а не слежкой. Данные используются исключительно для:
@@ -32,7 +47,10 @@ Privacy Policy / Политика конфиденциальности
         Улучшения качества связи и исправления багов.
     
     1.3. Передача третьим лицам (Отказ от продажи данных)
-        Мы не продаем, не обмениваем и не передаем вашу информацию. Нам нечего продавать: у нас нет ваших имен, почт или списков контактов. В Sona нет рекламных трекеров и скрытого сбора профилей. Ваша приватность — это наш главный продукт.
+        Мы не продаем, не обмениваем и не передаем вашу информацию. Нам нечего продавать: у нас нет ваших имен, почт или списков контактов. 
+        В Sona нет рекламных трекеров и скрытого сбора профилей. 
+        Ваша приватность — это наш главный продукт.
 
     1.4. Права пользователя
-        Поскольку Sona не требует регистрации, привязки телефона или почты, у нас нет «профиля», который можно было бы удалить. Вы анонимны по умолчанию и полностью контролируете свое присутствие в сети.
+        Поскольку Sona не требует регистрации, привязки телефона или почты, у нас нет «профиля», который можно было бы удалить. 
+        Вы анонимны по умолчанию и полностью контролируете свое присутствие в сети.
