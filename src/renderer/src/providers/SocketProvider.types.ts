@@ -14,7 +14,8 @@ export enum EmitEvent {
     LEAVE_ROOM = 'leave-room',
     SHARE = 'share',
     MUTE = 'mute',
-    SEND_MESSAGE = 'send-message'
+    SEND_MESSAGE = 'send-message',
+    ICERECONNECT = 'icereconnect'
 }
 
 export type EventData = Record<string, any>;

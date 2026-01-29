@@ -10,7 +10,7 @@ import {
   Stack,
   alpha,
   CircularProgress,
-  Badge,
+  Badge
 } from '@mui/material';
 import {
   Mic,
@@ -71,7 +71,8 @@ const CallScreen: React.FC = () => {
     handleMute, 
     handleShare, 
     handleSignal,
-    handleMessage
+    handleMessage,
+    handleReconnect
   } = useCallEvents(displayStream, clientsRef, stream);
   const activeAudioStreamRef = useRef<MediaStream | null>(null);
 
@@ -173,6 +174,7 @@ const CallScreen: React.FC = () => {
     subscribeEvent(EmitEvent.SHARE, handleShare);
     subscribeEvent(EmitEvent.MUTE, handleMute);
     subscribeEvent(EmitEvent.SEND_MESSAGE, handleMessage);
+    subscribeEvent(EmitEvent.ICERECONNECT, handleReconnect);
 
     return () => {
       unsubscribeEvent(EmitEvent.LEAVE_ROOM, handleDisconnect);
@@ -181,6 +183,7 @@ const CallScreen: React.FC = () => {
       unsubscribeEvent(EmitEvent.SHARE, handleShare);
       unsubscribeEvent(EmitEvent.MUTE, handleMute);
       unsubscribeEvent(EmitEvent.SEND_MESSAGE, handleMessage);
+      unsubscribeEvent(EmitEvent.ICERECONNECT, handleReconnect);
     }
   }, [isConnected, stream]);
 
@@ -239,6 +242,30 @@ const CallScreen: React.FC = () => {
     }
   }
 
+  /*const _handleReconnect = () => {
+    const client = clientsRef.current.find(c => c.id !== socket?.id);
+    if (!client) return;
+    if (!client.peer?._pc) return;
+
+  // 1. Останавливаем отправку данных, но оставляем объект живым
+    const senders = client.peer._pc.getSenders();
+    senders.forEach(sender => {
+      if (sender.track) sender.track.stop(); // Останавливаем железный захват
+    });
+
+    // 2. Взламываем состояние (только для тестов)
+    // Мы не можем вручную поменять iceConnectionState (оно readonly), 
+    // но мы можем вызвать событие, на которое подписан твой код:
+    const event = new Event('iceconnectionstatechange');
+    
+    // Хак: подменяем геттер состояния на время теста
+    Object.defineProperty(client.peer._pc, 'iceConnectionState', {
+      get: function() { return 'failed'; }
+    });
+
+  client.peer._pc.dispatchEvent(event);
+  }*/
+
   return (
     <>
       <ScreenSelector 
@@ -281,6 +308,13 @@ const CallScreen: React.FC = () => {
             <Typography color="textDisabled">
               { callTime }
             </Typography>
+            {
+              /*
+                <Button onClick={_handleReconnect}>
+                  RECONNECT
+                </Button>
+              */
+            }
           </Box>
           <Container maxWidth={false} sx={{ 
             flex: 1, 

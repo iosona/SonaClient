@@ -17,6 +17,7 @@ export interface StorageContextType {
   updateMediaDevice: (dev: keyof MediaDevicesIds, id?: string) => void;
   mediaDevsIds: MediaDevicesIds
   messages: MessageItem[];
+  cleanClient: (client: Client) => void;
   setMessages: Dispatch<SetStateAction<MessageItem[]>>
 }
 
@@ -125,7 +126,8 @@ export const StorageProvider: FC<{ children: React.ReactNode }> = ({ children })
       mediaDevsIds,
       roomId,
       messages,
-      setMessages
+      setMessages,
+      cleanClient
     }}>
       {children}
     </StorageContext.Provider>

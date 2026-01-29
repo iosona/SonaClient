@@ -63,19 +63,18 @@ const UserItem: FC<UserItemProps> = ({
             audioRef.current.srcObject = client.audioStream || null;
             logger.debug("Audio stream set to player");
         }
+
+        audioRef.current.play().catch(err => {
+            logger.error("Autoplay error:", err);
+        })
         
         const speechEvents = hark(client.audioStream, {
             interval: 100,
             threshold: -60
         })
 
-        speechEvents.on('speaking', () => {
-            setIsSpeaking(true);
-        });
-
-        speechEvents.on('stopped_speaking', () => {
-            setIsSpeaking(false);
-        });
+        speechEvents.on('speaking', () => setIsSpeaking(true));
+        speechEvents.on('stopped_speaking', () => setIsSpeaking(false));
 
         return () => {
             if (audioRef.current) {
@@ -175,9 +174,9 @@ const UserItem: FC<UserItemProps> = ({
                 { 
                     client.isMuted 
                     ? <MicOff color="disabled" />
-                    : <Mic color="disabled" /> 
+                    : <Mic color={isSpeaking ? "success" : 'disabled'} /> 
                 }
-                <audio ref={audioRef} autoPlay style={{ display: 'none' }} />
+                <audio ref={audioRef} style={{ display: 'none' }} />
             </ListItemButton>
         </UserItemMenu>
     )

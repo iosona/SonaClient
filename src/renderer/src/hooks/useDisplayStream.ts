@@ -21,13 +21,21 @@ export const useDisplayStream = (displayInfo: DisplayInfo | null) => {
             try {
                 const s = await navigator.mediaDevices.getDisplayMedia({
                     video: {
-                        frameRate: {
-                            ideal: 30, 
-                            max: 30 
-                        }
+                        frameRate: { max: 10 },
+                        displaySurface: 'monitor',
+                        width: { max: 1280 }, 
+                        height: { max: 720 },
                     },
                     audio: displayInfo.isSound
                 });
+
+                const videoTrack = s.getVideoTracks()[0];
+                if (videoTrack) {
+                    if ('contentHint' in videoTrack) {
+                        videoTrack.contentHint = 'text'; 
+                    }
+                }
+
                 setStream(s);
                 setIsError(false);
             } catch (error) {

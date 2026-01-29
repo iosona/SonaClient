@@ -16,11 +16,32 @@ export const useCallEvents = (
         createClient, 
         deleteClient,
         updateClient,
-        setMessages
+        setMessages,
+        cleanClient
     } = useStorage();
     const { emitEvent, socket } = useSocket();
     const { createPeer, addPeer, addStreamToPeer } = useP2P();
     const displayStreamRef = useRef<MediaStream | null>(null);
+
+    const _utilCreatePeer = (initialStream: MediaStream, data: any) => {
+        let peer: Instance | null = createPeer(
+            initialStream, 
+            (signal) => emitEvent(EmitEvent.SIGNAL, { signal, toUserId: data.userId }),
+            () => {
+                const client = clientsRef.current.find(c => c.id === data.userId);
+                if (!client) return;
+                cleanClient(client);
+                //peer?.destroy();
+                //peer = null;
+                //updateClient(data.userId, 'peer', null);
+                updateClient(client.id, 'peer', null);
+                updateClient(client.id, 'audioStream', null);
+                updateClient(client.id, 'displayStream', null)
+                emitEvent(EmitEvent.ICERECONNECT, { toUserId: data.userId })
+            }
+        );
+        return peer;
+    }
 
     useEffect(() => {
         displayStreamRef.current = displayStream;
@@ -84,18 +105,21 @@ export const useCallEvents = (
                     }
                 })
             }
+
             updateClient(userId, 'peer', p);
             peer = p;
         }
 
         if (peer.listeners("stream").length === 0) {
-            peer.on("stream", (s) => _handleStream(userId, s));
+            peer.on("stream", (s) => {
+                _handleStream(userId, s)
+            });
         }
     }
 
     const handleJoin: EventHandler = (_, data) => {
         if (!initialStream) return;
-        const peer = createPeer(initialStream, (signal) => emitEvent(EmitEvent.SIGNAL, { signal, toUserId: data.userId }));
+        const peer = _utilCreatePeer(initialStream, data);
         
         createClient({
             id: data.userId,
@@ -109,11 +133,32 @@ export const useCallEvents = (
 
         if (displayStreamRef.current) {
             peer.on("connect", () => {
-                if (displayStreamRef.current) {
+                if (displayStreamRef.current && peer) {
                     addStreamToPeer(peer, displayStreamRef.current);
                 }
             })
         }
+    }
+
+    const handleReconnect: EventHandler = (_, data) => {
+        if (!initialStream) return;
+        const client = clientsRef.current.find(c => c.id === data.userId);
+        //client?.peer?.destroy();
+        if (!client) return;
+        cleanClient(client);
+        updateClient(client.id, 'peer', null);
+        updateClient(client.id, 'audioStream', null);
+        updateClient(client.id, 'displayStream', null)
+        const peer = _utilCreatePeer(initialStream, data);
+        updateClient(data.userId, 'peer', peer);
+        if (displayStreamRef.current) {
+            peer.on("connect", () => {
+                if (displayStreamRef.current && peer) {
+                    addStreamToPeer(peer, displayStreamRef.current);
+                }
+            })
+        }
+        logger.debug("Peer reconnected");
     }
 
     const handleMute: EventHandler = (_, data) => {
@@ -138,6 +183,7 @@ export const useCallEvents = (
         handleMute,
         handleShare,
         handleSignal,
-        handleMessage
+        handleMessage,
+        handleReconnect
     }
 }
