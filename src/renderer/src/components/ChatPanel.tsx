@@ -1,5 +1,5 @@
-import { ArrowDownward, Chat, DeleteSweepOutlined, ForumOutlined } from "@mui/icons-material";
-import { alpha, Badge, Box, Fab, IconButton, Stack, Typography } from "@mui/material";
+import { ArrowDownward, Chat, DeleteSweepOutlined, Sms } from "@mui/icons-material";
+import { alpha, Badge, Box, Fab, Stack, Typography } from "@mui/material";
 import Message from "./Message";
 import { useStorage } from "@renderer/providers/useStorage";
 import MessagePanel from "./MessagePanel";
@@ -7,12 +7,15 @@ import { useSocket } from "@renderer/providers/useSocket";
 import { EmitEvent } from "@renderer/providers/SocketProvider.types";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { MessageItem } from "@renderer/types";
+import { WinIconButton } from "./WinIconButton";
+import { useTranslation } from "react-i18next";
 
 export function ChatPanel() {
     const { messages, clients, setMessages } = useStorage();
     const messagesRef = useRef<HTMLDivElement>(null);
     const { emitEvent, socket } = useSocket();
     const [isFullScrolled, setIsFullScrolled] = useState<boolean>(true);
+    const { t } = useTranslation();
 
     const handleScroll = () => {
         messagesRef.current?.scrollTo({ 
@@ -90,17 +93,15 @@ export function ChatPanel() {
                         <Chat sx={{ color: '#60cdff', fontSize: 20 }} />
                     </Box>
                     <Typography variant="subtitle2" sx={{ color: '#fff', fontWeight: 600, letterSpacing: 0.5, textTransform: 'uppercase' }}>
-                        чат
+                        { t("Chat") }
                     </Typography>
                 </Stack>
-                <IconButton 
+                <WinIconButton 
                     size="small" 
-                    sx={{ borderRadius: '0px' }} 
-                    color="error"
                     onClick={handleClearChat}
                 >
                     <DeleteSweepOutlined fontSize="small" color="error" />
-                </IconButton>
+                </WinIconButton>
             </Box>
             <div ref={messagesRef} style={{
                 display: 'flex',
@@ -108,7 +109,8 @@ export function ChatPanel() {
                 gap: '8px',
                 padding: '15px',
                 flex: '1 1 auto',
-                overflowY: 'auto'
+                overflowY: 'auto',
+                position: 'relative'
             }}>
                 {
                     !messages.length
@@ -117,11 +119,16 @@ export function ChatPanel() {
                         display: 'flex', 
                         flexDirection: 'column', 
                         alignItems: 'center', 
-                        textAlign: 'center'
+                        textAlign: 'center',
+                        position: 'absolute',
+                        top: '50%',
+                        left: '50%',
+                        transform: 'translate(-50%, -50%)'
                     }}>
-                        <ForumOutlined color="disabled" sx={{ fontSize: 48, mb: 1 }} />
-                        <Typography variant="body2" color="textDisabled">
-                            Сообщений пока нет
+                        <Sms color="disabled" sx={{ fontSize: 48 }} />
+                        <Typography color="textPrimary">{ t("NoMessages") }</Typography>
+                        <Typography sx={{ marginTop: '10px' }} variant="subtitle2" color="textSecondary">
+                            { t("WriteSomeThing") }
                         </Typography>
                     </Box>
                     :

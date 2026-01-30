@@ -6,13 +6,15 @@ import avatar5 from './avatars/a5.jpg'
 import avatar6 from './avatars/a6.jpg'
 import avatar7 from './avatars/a7.jpg'
 import avatar8 from './avatars/a8.jpg'
+import appIcon from '../../../resources/sona.png'
 
 export const GITHUB_URL = "https://github.com/iosona/SonaClient"
 export const TERMS_OF_USE_URL = "https://github.com/iosona/SonaClient/blob/main/TermsOfUse.txt"
 export const PRIVACY_POLICY_URL = "https://github.com/iosona/SonaClient/blob/main/PrivacyPolicy.txt"
 export const SERVER_URL = import.meta.env.VITE_SERVER_URL
 export const API_KEY = import.meta.env.VITE_SERVER_API_KEY
-export const VERSION = "1.0.1"
+export const VERSION = "1.0.2"
+export const APP_ICON = appIcon;
 
 export const avatarsList: any[] = [
     {

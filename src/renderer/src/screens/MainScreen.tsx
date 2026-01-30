@@ -13,6 +13,7 @@ import { useStorage } from "@renderer/providers/useStorage";
 import { ServerClient, UserData } from "@renderer/types";
 import { useSnackbar } from "notistack";
 import { ChangeEvent, FC, FormEvent, useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 const MainScreen: FC = () => {
     const [roomId, setRoomId] = useState<string>('');
@@ -20,6 +21,7 @@ const MainScreen: FC = () => {
     const { subscribeEvent, unsubscribeEvent, emitEvent, isConnected, socket } = useSocket();
     const { enqueueSnackbar } = useSnackbar();
     const userDataModal = useModal();
+    const { t } = useTranslation();
 
     useEffect(() => {
         if (!isConnected) {
@@ -42,7 +44,7 @@ const MainScreen: FC = () => {
                 case EmitStatus.ERROR:
                     enqueueSnackbar({
                         variant: 'error',
-                        message: 'Комната с таким ID не найдена'
+                        message: t("RoomNotFound")
                     });
                     break;
                 case EmitStatus.SUCCESS:
@@ -56,7 +58,7 @@ const MainScreen: FC = () => {
                 case EmitStatus.ERROR:
                     enqueueSnackbar({
                         variant: 'error',
-                        message: `Ошибка: ${data.detail}`
+                        message: `${t("Error")}${data.detail}`
                     });
                     break;
                 case EmitStatus.SUCCESS:
@@ -126,15 +128,15 @@ const MainScreen: FC = () => {
                 <WindowsCard>
                     <Typography variant="h5" fontWeight="600" color="#fff">Sona</Typography>
                     <Typography variant="caption" sx={{ color: 'rgba(255,255,255,0.5)', mb: 3, display: 'block' }}>
-                        Собрания и звонки
+                       { t("MeetingsAndCalls") }
                     </Typography>
 
                     <Stack spacing={2}>
                         <WinButton disabled={!isConnected} accent startIcon={<Add />} onClick={handleCreateRoom}>
-                            Создать комнату
+                            { t("CreateRoom") }
                         </WinButton>
                         <Divider sx={{ borderColor: 'rgba(255,255,255,0.05)' }}>
-                            <Typography variant="caption" color="rgba(255,255,255,0.3)">или</Typography>
+                            <Typography variant="caption" color="rgba(255,255,255,0.3)">{ t("Or") }</Typography>
                         </Divider>
 
                         <form onSubmit={handleSubmit}>
@@ -144,11 +146,11 @@ const MainScreen: FC = () => {
                                     size="small" 
                                     value={roomId} 
                                     onChange={handleChange} 
-                                    placeholder="Введите ID"
+                                    placeholder={ t("EnterRoomID") }
                                     type="password"
                                 />
                                 <WinButton disabled={!isConnected} type="submit" fullWidth>
-                                    Присоединиться
+                                    { t("Join") }
                                 </WinButton>
                             </Stack>
                         </form>

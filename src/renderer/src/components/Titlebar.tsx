@@ -1,6 +1,6 @@
 import { Close, CropSquare, Minimize } from '@mui/icons-material';
-import { IconButton, Box, Stack, Typography, alpha } from '@mui/material';
-import { VERSION } from '@renderer/constants';
+import { IconButton, Box, Stack, Typography, alpha, Avatar } from '@mui/material';
+import { APP_ICON, VERSION } from '@renderer/constants';
 
 export const TitleBar: React.FC = () => {
   return (
@@ -18,6 +18,11 @@ export const TitleBar: React.FC = () => {
       left: 0,
       right: 0,
     }}>
+      <Avatar src={APP_ICON} sx={{
+        width: '22px',
+        height: '22px',
+        marginLeft: '5px'
+      }} />
       <Typography 
         variant='caption' 
         sx={{ 

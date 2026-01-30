@@ -3,6 +3,7 @@ import ModalWindow from "./ModalWindow";
 import { Box, ImageList, ImageListItem, ImageListItemBar, Typography } from "@mui/material";
 import { CheckCircle } from "@mui/icons-material";
 import { WinButton } from "./WinButton";
+import { useTranslation } from "react-i18next";
 
 export interface DisplayInfo {
     displayId: string;
@@ -23,6 +24,7 @@ export default function ScreenSelector({
   const [screens, setScreens] = useState<any[]>([]);
   const [screenId, setScreenId] = useState<string | null>(null);
   const [isSound, _] = useState<boolean>(false);
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (!open) {
@@ -42,7 +44,7 @@ export default function ScreenSelector({
   return (
     <ModalWindow open={open} onClose={onClose} contentWidth="520px">
         <Typography variant="subtitle1" sx={{ fontWeight: 600, color: '#fff', mb: 1 }}>
-            Демонстрация экрана
+            { t("ScreenSharing") }
         </Typography>
         
         <ImageList 
@@ -131,13 +133,13 @@ export default function ScreenSelector({
                 } 
                 label={
                     <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.7)' }}>
-                        Транслировать звук
+                        { t("TranslateSound") }
                     </Typography>
                 } 
             />*/}
             <Box sx={{ display: 'flex', gap: 1.5 }}>
                 <WinButton onClick={onClose} sx={{ minWidth: '100px' }}>
-                    Отмена
+                    { t("Cancel") }
                 </WinButton>
                 <WinButton 
                     accent 
@@ -145,7 +147,7 @@ export default function ScreenSelector({
                     onClick={handleConfirm}
                     sx={{ minWidth: '120px' }}
                 >
-                    Начать показ
+                    { t("StartShare") }
                 </WinButton>
             </Box>
         </Box>

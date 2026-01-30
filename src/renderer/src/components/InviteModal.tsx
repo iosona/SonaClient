@@ -4,7 +4,8 @@ import ModalWindow from "./ModalWindow";
 import { Box, Typography } from "@mui/material";
 import CopyText from "./CopyText";
 import QrCodeDisplay from "./QrCodeDisplay";
-import { WinButton } from "./WinButton"; // Твой компонент
+import { WinButton } from "./WinButton";
+import { useTranslation } from "react-i18next";
 
 export interface InviteModalProps {
     children: JSX.Element
@@ -16,6 +17,7 @@ export default function InviteModal({
     id,
 }: InviteModalProps) {
   const { open, handleClose, handleOpen } = useModal();
+  const { t } = useTranslation();
 
   const genUrl = () => {
     return `sona://join?id=${id}`
@@ -26,7 +28,7 @@ export default function InviteModal({
         <children.type {...children.props} onClick={handleOpen} />
         <ModalWindow open={open} onClose={handleClose}>
             <Typography variant="h6">
-               Пригласить
+               { t("Invite") }
             </Typography>
             <Box sx={{
                 display: 'flex',
@@ -44,7 +46,7 @@ export default function InviteModal({
                         variant="caption"
                         sx={{ marginRight: 'auto' }}
                     >
-                        Копировать ID
+                        { t("CopyID") }
                         </Typography>
                     <CopyText>{id}</CopyText>
                 </Box>
@@ -58,7 +60,7 @@ export default function InviteModal({
                         variant="caption"
                         sx={{ marginRight: 'auto' }}
                     >
-                        Сканировать QR-Код
+                        { t("ScanQRCode") }
                     </Typography>
                     <QrCodeDisplay 
                         size={200} 
@@ -73,7 +75,7 @@ export default function InviteModal({
                 fullWidth
                 sx={{ marginLeft: 'auto', marginTop: '20px' }}
             >    
-                OK
+                { t("OK") }
             </WinButton>
         </ModalWindow>
     </>

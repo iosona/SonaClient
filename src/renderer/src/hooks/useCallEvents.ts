@@ -6,6 +6,7 @@ import { RefObject, useEffect, useRef } from "react";
 import { Client } from "@renderer/types";
 import { Instance } from "simple-peer";
 import { logger } from "@renderer/logger";
+import { useTranslation } from "react-i18next";
 
 export const useCallEvents = (
     displayStream: MediaStream | null,
@@ -22,6 +23,7 @@ export const useCallEvents = (
     const { emitEvent, socket } = useSocket();
     const { createPeer, addPeer, addStreamToPeer } = useP2P();
     const displayStreamRef = useRef<MediaStream | null>(null);
+    const { t } = useTranslation();
 
     const _utilCreatePeer = (initialStream: MediaStream, data: any) => {
         let peer: Instance | null = createPeer(
@@ -77,7 +79,7 @@ export const useCallEvents = (
         ]);
 
         if (socket?.id !== data.userId) {
-            window.api.sendNotify("Новое сообщение", data.message);
+            window.api.sendNotify(t("NewMessage"), data.message);
         }
     };
 

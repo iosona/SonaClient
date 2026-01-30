@@ -1,6 +1,7 @@
 import { CopyAll } from "@mui/icons-material";
-import { Box, BoxProps, IconButton, Typography } from "@mui/material";
+import { Box, BoxProps, Typography } from "@mui/material";
 import { FC } from "react";
+import { WinIconButton } from "./WinIconButton";
 
 const CopyText: FC<BoxProps> = ({
     children,
@@ -29,9 +30,9 @@ const CopyText: FC<BoxProps> = ({
             <Typography noWrap>
                 { children }
             </Typography>
-            <IconButton onClick={onCopy}>
-                <CopyAll />
-            </IconButton>
+            <WinIconButton size="small" onClick={onCopy}>
+                <CopyAll fontSize="small" />
+            </WinIconButton>
         </Box>
     )
 }

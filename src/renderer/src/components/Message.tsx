@@ -3,6 +3,7 @@ import { UserData } from "@renderer/types";
 import { getAvatarSrcById, getHexColorByUsername } from "@renderer/utils";
 import Linkify from "linkify-react";
 import { FC, useEffect, useRef } from "react";
+import { useTranslation } from "react-i18next";
 
 const slideUp = keyframes`
   from {
@@ -27,6 +28,7 @@ const Message: FC<MessageProps> = ({
     onVisible
 }) => {
     const messageRef = useRef<HTMLDivElement>(null);
+    const { t } = useTranslation();
 
     useEffect(() => {
         if (!messageRef.current) {
@@ -43,7 +45,7 @@ const Message: FC<MessageProps> = ({
         observer.observe(messageRef.current);
     }, []);
 
-    const userName = userData?.userName || "Аноним"
+    const userName = userData?.userName || t("Anonymous")
 
     const options = {
         attributes: {

@@ -2,7 +2,6 @@ import { FormEvent, useState } from "react";
 import { 
   Box, 
   Avatar, 
-  IconButton, 
   Typography, 
   Stack,
   alpha,
@@ -15,6 +14,8 @@ import { ChevronRight, Close, ListAlt, PhotoCamera } from "@mui/icons-material";
 import { WinTextField } from "./WinTextField";
 import { WinButton } from "./WinButton";
 import { UserData } from "@renderer/types";
+import { WinIconButton } from "./WinIconButton";
+import { useTranslation } from "react-i18next";
 
 export interface UserDataModalProps extends Omit<ModalWindowProps, 'children'>
 {
@@ -29,6 +30,7 @@ export default function UserDataModal({
   const [name, setName] = useState("");
   const [selectedAvatar, setSelectedAvatar] = useState<string | null>(null);
   const avatarSrc = getAvatarSrcById(selectedAvatar);
+  const { t } = useTranslation();
 
   const handleClose = () => onClose && onClose({}, "escapeKeyDown");
 
@@ -45,7 +47,7 @@ export default function UserDataModal({
 
   return (
     <ModalWindow contentWidth="360px" open={open} onClose={onClose}>
-      <IconButton 
+      <WinIconButton 
         onClick={handleClose} 
         size="small"
         sx={{ 
@@ -56,14 +58,14 @@ export default function UserDataModal({
         }}
       >
         <Close fontSize="small" />
-      </IconButton>
+      </WinIconButton>
 
       <Box sx={{ textAlign: 'center', mt: 1 }}>
         <Typography 
           variant="subtitle1" 
           sx={{ mb: 3, fontWeight: 600, color: '#fff', letterSpacing: -0.2 }}
         >
-          Настройка профиля
+          { t("ProfileSettings") }
         </Typography>
 
         <form onSubmit={handleSubmit}>
@@ -117,7 +119,7 @@ export default function UserDataModal({
                 avatarsList.length
                 ?
                 avatarsList.map((avatar) => (
-                    <Tooltip key={avatar.id} title="Выбрать" arrow>
+                    <Tooltip key={avatar.id} title={ t("Select") } arrow>
                       <Box 
                         onClick={() => setSelectedAvatar(selectedAvatar === avatar.id ? null : avatar.id)}
                         sx={{
@@ -151,7 +153,7 @@ export default function UserDataModal({
                   alignItems: 'center'
                 }} color="textDisabled" variant="caption" whiteSpace="nowrap">
                   <ListAlt />
-                  Список фото пуст
+                  { t("NoPhotos") }
                 </Typography>
               }
             </Box>
@@ -159,10 +161,9 @@ export default function UserDataModal({
               fullWidth
               autoFocus
               size="small"
-              label="Ваше имя"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              placeholder="Как к вам обращаться?"
+              placeholder={ t("HowToAddressYou") }
             />
             <WinButton
               fullWidth 
@@ -170,7 +171,7 @@ export default function UserDataModal({
               endIcon={<ChevronRight />}
               type="submit"
             >
-              Готово
+              { t("Ready") }
             </WinButton>
           </Stack>
         </form>

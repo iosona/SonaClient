@@ -2,6 +2,7 @@ import { FiberManualRecord } from "@mui/icons-material"
 import { Box, BoxProps, Tooltip, Typography, alpha, keyframes } from "@mui/material"
 import { useSocket } from "@renderer/providers/useSocket"
 import { FC } from "react"
+import { useTranslation } from "react-i18next";
 
 const pulse = keyframes`
   0% { opacity: 1; transform: scale(1); }
@@ -11,6 +12,7 @@ const pulse = keyframes`
 
 const ConnectionIndicator: FC<BoxProps> = (props) => {
     const { isConnected, isVerificationError } = useSocket();
+    const { t } = useTranslation();
 
     const statusColor = isVerificationError 
         ? '#ff99a4'
@@ -19,10 +21,10 @@ const ConnectionIndicator: FC<BoxProps> = (props) => {
             : '#ffb900';
 
     const statusText = isVerificationError 
-        ? 'Ошибка верификации' 
+        ? t("VerificationError")
         : isConnected 
-            ? 'В сети' 
-            : 'Подключение...';
+            ? t("Online")
+            : t("Connection");
 
     return (
         <Tooltip 
@@ -30,10 +32,10 @@ const ConnectionIndicator: FC<BoxProps> = (props) => {
             placement="bottom"
             title={
                 isVerificationError
-                ? 'Клиент не прошёл верификацию.'
+                ? t("ClientDidtPassVerification") 
                 : isConnected
-                ? 'Защищенное соединение установлено.'
-                : 'Попытка установить соединение с сервером Sona...'
+                ? t("ConnectionEstablished") 
+                : t("ConnectionAttempt")
             }
         >
             <Box 

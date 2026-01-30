@@ -6,6 +6,7 @@ import { StorageProvider } from './providers/StorageProvider'
 import { SocketProvider } from './providers/SocketProvider'
 import { CustomThemeProvider } from './providers/ThemeProvider'
 import { Buffer } from 'buffer'
+import './i18n'
 
 window.Buffer = Buffer
 window.process = process;

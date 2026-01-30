@@ -8,6 +8,7 @@ import { FC, useEffect, useMemo, useRef, useState } from "react";
 import UserItemMenu from "./UserItemMenu";
 import hark from 'hark'
 import { logger } from "@renderer/logger";
+import { useTranslation } from "react-i18next";
 
 export interface UserItemProps extends ListItemButtonProps {
     client: Client
@@ -26,6 +27,7 @@ const UserItem: FC<UserItemProps> = ({
     const { mediaDevsIds } = useStorage();
     const [isSpeaking, setIsSpeaking] = useState<boolean>(false);
     const [volume, setVolume] = useState<number>(100);
+    const { t } = useTranslation();
 
     const isMe = socket?.id === client.id;
     const soundUI = useMemo(() => getUIFromVolume(volume), [volume]);
@@ -33,25 +35,25 @@ const UserItem: FC<UserItemProps> = ({
         if (!client.isStreamReady) {
             return {
                 color: 'primary',
-                label: "соединение..."
+                label: t("Connection")
             }
         }
         if (isSpeaking) {
             return {
                 color: 'success',
-                label: "говорит"
+                label: t("Speaking")
             }
         }
         if (client.peer?.closed || client.peer?.errored || client.peer?.destroyed) {
             return {
                 color: 'error',
-                label: "ошибка соединения"
+                label: t("ConnectionError")
             }
         }
 
         return {
             color: 'primary',
-            label: "слушает"
+            label: t("Listen")
         }
     }, [client, isSpeaking]);
 
@@ -151,7 +153,7 @@ const UserItem: FC<UserItemProps> = ({
                                 { 
                                     client.id === socket?.id
                                     &&
-                                    <Typography variant="caption" color="success">(вы)</Typography> 
+                                    <Typography variant="caption" color="success">({ t("You") })</Typography> 
                                 }
                                 { userStatus.label }
                             </Typography>

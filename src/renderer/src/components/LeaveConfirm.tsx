@@ -3,6 +3,7 @@ import { JSX } from "react";
 import ModalWindow from "./ModalWindow";
 import { Box, Typography } from "@mui/material";
 import { WinButton } from "./WinButton";
+import { useTranslation } from "react-i18next";
 
 export interface LeaveConfirmProps {
     children: JSX.Element
@@ -14,6 +15,7 @@ export default function LeaveConfirm({
     onLeave
 }: LeaveConfirmProps) {
   const { open, handleClose, handleOpen } = useModal();
+  const { t } = useTranslation();
 
   const leave = () => {
     handleClose();
@@ -25,11 +27,11 @@ export default function LeaveConfirm({
         <children.type {...children.props} onClick={handleOpen} />
         <ModalWindow open={open} onClose={handleClose} contentWidth="360px">
             <Typography variant="body1" sx={{ fontWeight: 600, color: '#fff', mb: 1 }}>
-                Завершение вызова
+                { t("CallEnd") }
             </Typography>
             
             <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.6)', mb: 3 }}>
-                Вы действительно хотите покинуть встречу и отключиться от комнаты?
+                { t("CallEndConfirm") }
             </Typography>
 
             <Box sx={{ display: 'flex', justifyContent: 'flex-end', gap: 1.5 }}>
@@ -37,7 +39,7 @@ export default function LeaveConfirm({
                     onClick={handleClose}
                     sx={{ px: 3 }}
                 >
-                    Отмена
+                    { t("Cancel") }
                 </WinButton>
                 <WinButton 
                     onClick={leave} 
@@ -48,7 +50,7 @@ export default function LeaveConfirm({
                         '&:hover': { bgcolor: '#c40e1d' }
                     }}
                 >
-                    Отключиться
+                    { t("Disconnect") }
                 </WinButton>
             </Box>
         </ModalWindow>
