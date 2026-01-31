@@ -1,8 +1,9 @@
-import { Box, Menu, Slider, Stack, Typography } from "@mui/material";
+import { Box, Menu, Stack, Typography } from "@mui/material";
 import { useMenu } from "@renderer/hooks/useMenu";
 import { UserData } from "@renderer/types";
 import { getAvatarSrcById, getHexColorByUsername, getUIFromVolume } from "@renderer/utils";
 import { FC, JSX, useEffect, useMemo, useState } from "react";
+import WinSlider from "./WinSlider";
 
 export interface UserItemMenuProps {
     children: JSX.Element;
@@ -106,29 +107,13 @@ const UserItemMenu: FC<UserItemMenuProps> = ({
                                 &&
                                 <data.icon />
                             }
-                            <Slider
-                                aria-label="Volume" 
+                            <WinSlider
                                 value={volume}
                                 onChange={(_, val: any) => setVolume(val)} 
                                 min={0}
                                 color={data?.color as any}
                                 max={100}
                                 step={1}
-                                
-                                sx={{
-                                    '& .MuiSlider-thumb': {
-                                        display: 'none',
-                                    },
-                                    '& .MuiSlider-rail': {
-                                        opacity: 0.5,
-                                        backgroundColor: '#bfbfbf',
-                                        borderRadius: '0px'
-                                    },
-                                    '& .MuiSlider-track': {
-                                        border: 'none',
-                                        borderRadius: '0px'
-                                    },
-                                }}
                             />
                         </Stack>
                     }

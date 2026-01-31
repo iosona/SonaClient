@@ -35,13 +35,13 @@ export const useCallScreenMethods = () => {
     const connectionLostModal = useModal();
     const callTime = useCallTimer(true);
     const {
-    handleDisconnect, 
-    handleJoin, 
-    handleMute, 
-    handleShare, 
-    handleSignal,
-    handleMessage,
-    handleReconnect
+        handleDisconnect, 
+        handleJoin, 
+        handleMute, 
+        handleShare, 
+        handleSignal,
+        handleMessage,
+        handleReconnect
     } = useCallEvents(displayStream, clientsRef, stream);
     const activeAudioStreamRef = useRef<MediaStream | null>(null);
 

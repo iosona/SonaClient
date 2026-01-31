@@ -1,6 +1,6 @@
 import { logger } from '@renderer/logger';
 import { Client, MessageItem } from '@renderer/types';
-import { createContext, Dispatch, FC, SetStateAction, useState } from 'react';
+import { createContext, Dispatch, FC, SetStateAction, useEffect, useState } from 'react';
 
 export interface StorageContextType {
   clients: Client[];
@@ -19,10 +19,18 @@ export interface StorageContextType {
   messages: MessageItem[];
   cleanClient: (client: Client) => void;
   setMessages: Dispatch<SetStateAction<MessageItem[]>>
+  sharingQuality: string;
+  setSharingQuality: Dispatch<SetStateAction<string>>;
+  sharingFPS: number;
+  setSharingFPS: Dispatch<SetStateAction<number>>;
+  isVoiceChange: boolean;
+  setIsVoiceChange: Dispatch<SetStateAction<boolean>>;
 }
 
 const INPUT_DEV_NAME = "inputAudioDevice"
 const OUTPUT_DEV_NAME = "outputAudioDevice"
+const QUALITY_NAME = "quality"
+const FPS_NAME = "fps"
 
 export interface MediaDevicesIds {
   [INPUT_DEV_NAME]?: string;
@@ -39,6 +47,13 @@ export const StorageProvider: FC<{ children: React.ReactNode }> = ({ children })
     inputAudioDevice: localStorage.getItem(INPUT_DEV_NAME) || undefined,
     outputAudioDevice: localStorage.getItem(OUTPUT_DEV_NAME) || undefined
   })
+  const [sharingQuality, setSharingQuality] = useState<string>(
+    localStorage.getItem(QUALITY_NAME) || "720p"
+  );
+  const [sharingFPS, setSharingFPS] = useState<number>(
+    Number(localStorage.getItem(FPS_NAME)) || 10
+  );
+  const [isVoiceChange, setIsVoiceChange] = useState<boolean>(false);
 
   const updateMediaDevice = (dev: keyof MediaDevicesIds, id?: string) => {
     setMediaDevsIds(prev => ({ ...prev, [dev]: id }));
@@ -49,6 +64,14 @@ export const StorageProvider: FC<{ children: React.ReactNode }> = ({ children })
       localStorage.setItem(dev, id);
     }
   }
+
+  useEffect(() => {
+    localStorage.setItem(QUALITY_NAME, sharingQuality);
+  }, [sharingQuality]);
+  
+  useEffect(() => {
+    localStorage.setItem(FPS_NAME, sharingFPS.toString());
+  }, [sharingFPS])
 
   const createClient = (client: Client) => {
     setClients(prev => [...prev, client]);
@@ -108,6 +131,7 @@ export const StorageProvider: FC<{ children: React.ReactNode }> = ({ children })
     setClients([]);
     setMessages([]);
     setRoomId(null);
+    setIsVoiceChange(false);
   }
 
   return (
@@ -127,7 +151,13 @@ export const StorageProvider: FC<{ children: React.ReactNode }> = ({ children })
       roomId,
       messages,
       setMessages,
-      cleanClient
+      cleanClient,
+      sharingQuality,
+      setSharingQuality,
+      sharingFPS,
+      setSharingFPS,
+      setIsVoiceChange,
+      isVoiceChange
     }}>
       {children}
     </StorageContext.Provider>

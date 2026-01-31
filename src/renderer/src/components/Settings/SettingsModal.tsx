@@ -1,11 +1,13 @@
 import { FC, JSX } from "react";
-import ModalWindow from "./ModalWindow";
-import { Box, MenuItem, Select, Typography, alpha, styled } from "@mui/material";
+import ModalWindow from "../ModalWindow";
+import { Box, List, MenuItem, Select, Typography, alpha, styled } from "@mui/material";
 import { useModal } from "@renderer/hooks/useModal";
 import { useDevices } from "@renderer/hooks/useDevices";
 import { useStorage } from "@renderer/providers/useStorage";
-import { WinButton } from "./WinButton";
+import { WinButton } from "../WinButton";
 import { useTranslation } from "react-i18next";
+import { SettingsCategory } from "./SettingsCategory";
+import { FPS_RANGE, LANGUAGES, QUALITY } from "@renderer/constants";
 
 export interface SettingsModalProps {
     children: JSX.Element
@@ -31,28 +33,33 @@ const WinSelect = styled(Select)({
     }
 });
 
-const languages = [
-    { code: 'en', label: 'English' },
-    { code: 'ru', label: 'Русский' },
-    { code: 'uk', label: 'Українська' },
-    { code: 'de', label: 'Deutsch' },
-    { code: 'fr', label: 'Français' },
-    { code: 'sp', label: 'Español' },
-    { code: 'ch', label: '简体中文' }
-];
-
 const SettingsModal: FC<SettingsModalProps> = ({
     children
 }) => {
     const { open, handleClose, handleOpen } = useModal();
     const { outputDevs, inputDevs } = useDevices();
-    const { mediaDevsIds, updateMediaDevice } = useStorage();
+    const { 
+        mediaDevsIds, 
+        updateMediaDevice, 
+        sharingQuality, 
+        setSharingQuality, 
+        sharingFPS, 
+        setSharingFPS,
+    } = useStorage();
     const { t, i18n } = useTranslation();
     
     return (
         <>
             <children.type {...children.props} onClick={handleOpen} />
-            <ModalWindow contentWidth="400px" open={open} onClose={handleClose}>
+                <ModalWindow 
+                    contentHeight="auto" 
+                    contentWidth="min(655px, 95vw)" 
+                    open={open} 
+                    onClose={handleClose}
+                    sx={{
+                        marginTop: '25px'
+                    }}
+            >
                 <Typography variant="h6" sx={{ fontWeight: 600, color: '#fff', mb: 1 }}>
                     { t("Settings") }
                 </Typography>
@@ -60,12 +67,47 @@ const SettingsModal: FC<SettingsModalProps> = ({
                     display: 'flex',
                     flexDirection: 'column',
                     gap: '16px',
-                    outline: 'none'
+                    outline: 'none',
+                    maxHeight: 'calc(90vh - 150px)', 
+                    overflowY: 'auto',
+                    pr: 0.5
                 }}>
-                    <Box sx={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                        <Typography variant="body2" sx={{ color: '#60cdff', fontWeight: 500 }}>
-                            { t("Language") }
-                        </Typography>
+                    <SettingsCategory title={t("ScreenSharing")}>
+                        <SettingsCategory subTitle={t("QualityText")} title={t("Quality")} titleProps={{
+                            variant: 'subtitle2',
+                            color: 'textPrimary',
+                        }} sx={{ gap: '0px', marginLeft: '15px' }}>
+                            <List sx={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
+                                {
+                                    QUALITY.map(item => (
+                                        <WinButton onClick={() => setSharingQuality(item.name)} accent={sharingQuality === item.name} key={item.name}>
+                                            {item.name}
+                                        </WinButton>
+                                    ))
+                                }
+                            </List>
+                        </SettingsCategory>
+                        <SettingsCategory 
+                            subTitle={t("FPSText")}
+                            title={t("FPS")} 
+                            titleProps={{
+                                variant: 'subtitle2',
+                                color: 'textPrimary',
+                            }} 
+                            sx={{ gap: '0px', marginLeft: '15px' }}
+                        >
+                            <List sx={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
+                                {
+                                    FPS_RANGE.map(fps => (
+                                        <WinButton onClick={() => setSharingFPS(fps)} accent={sharingFPS === fps} key={fps}>
+                                            {fps} FPS
+                                        </WinButton>
+                                    ))
+                                }
+                            </List>
+                        </SettingsCategory>
+                    </SettingsCategory>
+                    <SettingsCategory title={t("Language")}>
                         <WinSelect 
                             value={i18n.language} 
                             size="small" 
@@ -82,7 +124,7 @@ const SettingsModal: FC<SettingsModalProps> = ({
                             }}
                         >
                             {
-                                languages.map(lang => (
+                                LANGUAGES.map(lang => (
                                     <MenuItem
                                         onClick={() => i18n.changeLanguage(lang.code)}
                                         value={lang.code} 
@@ -99,12 +141,9 @@ const SettingsModal: FC<SettingsModalProps> = ({
                                 ))
                             }
                         </WinSelect>
-                    </Box>
+                    </SettingsCategory>
 
-                    <Box sx={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                        <Typography variant="body2" sx={{ color: '#60cdff', fontWeight: 500 }}>
-                            { t("SoundOutput") }
-                        </Typography>
+                    <SettingsCategory title={ t("SoundOutput") }>
                         <WinSelect 
                             value={!mediaDevsIds.outputAudioDevice ? outputDevs[0]?.deviceId || '' : mediaDevsIds.outputAudioDevice} 
                             size="small" 
@@ -133,12 +172,9 @@ const SettingsModal: FC<SettingsModalProps> = ({
                                 ))
                             }
                         </WinSelect>
-                    </Box>
+                    </SettingsCategory>
 
-                    <Box sx={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                        <Typography variant="body2" sx={{ color: '#60cdff', fontWeight: 500 }}>
-                            { t("Microphone") }
-                        </Typography>
+                    <SettingsCategory title={ t("Microphone") }>
                         <WinSelect 
                             value={!mediaDevsIds.inputAudioDevice ? inputDevs[0]?.deviceId || '' : mediaDevsIds.inputAudioDevice} 
                             size="small" 
@@ -167,8 +203,9 @@ const SettingsModal: FC<SettingsModalProps> = ({
                                 ))
                             }
                         </WinSelect>
-                    </Box>
+                    </SettingsCategory>
                 </Box>
+
                 <WinButton
                     accent 
                     onClick={handleClose}

@@ -1,5 +1,6 @@
-import { dialog } from "electron";
+import { BrowserWindow, dialog } from "electron";
 import { autoUpdater } from 'electron-updater'
+import { getLocalizationContext } from "./localization";
 
 autoUpdater.setFeedURL({
   provider: 'github',
@@ -9,29 +10,33 @@ autoUpdater.setFeedURL({
 
 autoUpdater.autoDownload = false;
 
-export function setupUpdater() {
-  autoUpdater.on('update-available', (info) => {
+export function setupUpdater(mainWindow: BrowserWindow) {
+  autoUpdater.on('update-available', async (info) => {
+    const context = await getLocalizationContext(mainWindow);
+
     dialog.showMessageBox({
       type: 'info',
-      title: 'Обновление доступно',
-      message: `Найдена версия ${info.version}. Скачать сейчас?`,
-      buttons: ['Да', 'Позже']
+      title: context.UpdateAvailable,
+      message: `${context.VersionFound} ${info.version}. ${context.DownloadNow}`,
+      buttons: [context.Yes, context.Later]
     }).then(result => {
       if (result.response === 0) autoUpdater.downloadUpdate();
     });
   });
 
   autoUpdater.on('download-progress', (progressObj) => {
-    let log_message = "Скорость: " + progressObj.bytesPerSecond;
-    log_message = log_message + ' - Скачано ' + progressObj.percent + '%';
+    let log_message = "Speed: " + progressObj.bytesPerSecond;
+    log_message = log_message + ' - Downloaded ' + progressObj.percent + '%';
     console.log(log_message); 
   });
 
-  autoUpdater.on('update-downloaded', () => {
+  autoUpdater.on('update-downloaded', async () => {
+    const context = await getLocalizationContext(mainWindow);
+    
     dialog.showMessageBox({
-      title: 'Готово к установке',
-      message: 'Обновление скачано. Перезапустить приложение сейчас?',
-      buttons: ['Перезапустить', 'Позже']
+      title: context.ReadyToInstall,
+      message: context.UpdateDownloaded,
+      buttons: [context.Restart, context.Later]
     }).then(result => {
       if (result.response === 0) autoUpdater.quitAndInstall();
     });

@@ -9,6 +9,7 @@ export interface Api {
   sendNotify: (title: string, body: string) => void;
   getScreenSources: () => Promise<Electron.DesktopCapturerSource[]>;
   openUrl: (url: string) => void;
+  resizeWindow: (w: number, h: number) => void;
 }
 
 export interface SysInfo {

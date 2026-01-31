@@ -1,4 +1,4 @@
-import { People } from "@mui/icons-material";
+import { AdminPanelSettings, People } from "@mui/icons-material";
 import { alpha, Box, BoxProps, Stack, Typography } from "@mui/material";
 import { useStorage } from "@renderer/providers/useStorage";
 import { FC } from "react";
@@ -13,7 +13,7 @@ const TopBar: FC<TopBarProps> = ({
     sx,
     ...props
 }) => {
-    const { clients } = useStorage();
+    const { clients, isVoiceChange } = useStorage();
     const { t } = useTranslation();
 
     return (
@@ -33,6 +33,19 @@ const TopBar: FC<TopBarProps> = ({
                     { t("VoiceChat") }
                     <Box component="span" sx={{ color: 'rgba(255,255,255,0.4)', ml: 1 }}>{clients.length}</Box>
                 </Typography>
+                {
+                    isVoiceChange
+                    &&
+                    <Box sx={{ display: 'flex', gap: '4px' }}>
+                        <AdminPanelSettings color="info" />
+                        <Typography sx={{
+                            marginTop: '5px'
+                        }} fontWeight={600} color="info" variant="caption">
+                            
+                            {t("VoiceAnonymous")}
+                        </Typography>
+                    </Box>
+                }
             </Stack>
             <Typography color="textDisabled">
                 { callTime }
@@ -42,11 +55,3 @@ const TopBar: FC<TopBarProps> = ({
 }
 
 export default TopBar;
-
-/*
-lang
-you
-select
-new message
-enter id
-*/

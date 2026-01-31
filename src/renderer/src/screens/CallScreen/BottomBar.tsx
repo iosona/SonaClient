@@ -1,7 +1,7 @@
 import { CallEnd, Mic, MicOff, ScreenShare, Settings, Sms, StopScreenShare } from "@mui/icons-material";
 import { Badge, Box, BoxProps, Divider, Paper, Stack } from "@mui/material";
 import LeaveConfirm from "@renderer/components/LeaveConfirm";
-import SettingsModal from "@renderer/components/SettingsModal";
+import SettingsModal from "@renderer/components/Settings/SettingsModal";
 import { WinIconButton } from "@renderer/components/WinIconButton";
 import { Client } from "@renderer/types";
 import { Dispatch, FC, SetStateAction } from "react";

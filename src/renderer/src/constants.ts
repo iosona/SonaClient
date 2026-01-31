@@ -50,3 +50,48 @@ export const avatarsList: any[] = [
         src: avatar8
     }
 ]
+
+export const QUALITY = [
+    {
+        name: "144p",
+        resolution: [256, 144]
+    },
+    {
+        name: "240p",
+        resolution: [426, 240]
+    },
+    {
+        name: "340p",
+        resolution: [340, 480]
+    },
+    {
+        name: "480p",
+        resolution: [640, 480]
+    },
+    {
+        name: "720p",
+        resolution: [1280, 720]
+    },
+    {
+        name: "1080p",
+        resolution: [1920, 1080]
+    }
+]
+
+export const LANGUAGES = [
+    { code: 'en', label: 'English' },
+    { code: 'ru', label: 'Русский' },
+    { code: 'uk', label: 'Українська' },
+    { code: 'de', label: 'Deutsch' },
+    { code: 'fr', label: 'Français' },
+    { code: 'sp', label: 'Español' },
+    { code: 'ch', label: '简体中文' }
+];
+
+export const FPS_RANGE = [
+    10,
+    15,
+    20,
+    25,
+    30
+]

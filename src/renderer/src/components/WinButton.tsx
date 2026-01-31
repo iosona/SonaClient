@@ -12,7 +12,7 @@ export const WinButton = styled(Button, {
     ...(accent ? {
         backgroundColor: '#60cdff',
         color: '#000',
-        borderBottom: '2px solid rgba(0,0,0,0.2)',
+        border: '1px solid transparent',
         '&:hover': { backgroundColor: '#56b8e6' },
         '&:disabled': {
             opacity: "0.8",

@@ -7,11 +7,13 @@ import { WindowsCard } from './WindowsCard';
 export interface ModalWindowProps extends Omit<ModalProps, 'children'> {
     children: ReactNode
     contentWidth?: string
+    contentHeight?: string
 }
 
 export default function ModalWindow({
     children,
     contentWidth = '400px',
+    contentHeight = 'auto',
     ...props
 }: ModalWindowProps) {
   return (
@@ -22,7 +24,6 @@ export default function ModalWindow({
           timeout: 200,
           sx: { 
               backgroundColor: 'rgba(0, 0, 0, 0.7)',
-              backdropFilter: 'none'
           }
         },
       }} 
@@ -30,10 +31,25 @@ export default function ModalWindow({
     >
       <Fade in={props.open}>
           <Box sx={{
-              position: 'absolute', top: '50%', left: '50%', 
-              transform: 'translate(-50%, -50%)', outline: 'none'
+              position: 'absolute', 
+              top: '50%', 
+              left: '50%', 
+              transform: 'translate(-50%, -50%)', 
+              outline: 'none',
+              maxWidth: '95vw', 
+              maxHeight: '95vh', 
+              display: 'flex'
           }}>
-              <WindowsCard sx={{ width: contentWidth, p: 4, textAlign: 'left' }}>
+              <WindowsCard sx={{ 
+                width: contentWidth, 
+                height: contentHeight,
+                p: 4, 
+                textAlign: 'left',
+                maxHeight: '95vh', 
+                overflowY: 'auto',
+                display: 'flex',
+                flexDirection: 'column'
+              }}>
                   { children }
               </WindowsCard>
           </Box>

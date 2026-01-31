@@ -120,14 +120,29 @@ export function ChatPanel() {
                         flexDirection: 'column', 
                         alignItems: 'center', 
                         textAlign: 'center',
+                        margin: 'auto',
+                        padding: '20px',
+                        width: '100%',
+                        maxWidth: '300px',
                         position: 'absolute',
                         top: '50%',
                         left: '50%',
-                        transform: 'translate(-50%, -50%)'
+                        transform: 'translate(-50%, -50%)',
+                        '@media (max-width: 400px)': {
+                            padding: '10px',
+                            '& .MuiSvgIcon-root': { fontSize: 40 },
+                            '& .MuiTypography-root': { fontSize: '0.9rem' }
+                        }
                     }}>
-                        <Sms color="disabled" sx={{ fontSize: 48 }} />
-                        <Typography color="textPrimary">{ t("NoMessages") }</Typography>
-                        <Typography sx={{ marginTop: '10px' }} variant="subtitle2" color="textSecondary">
+                        <Sms color="disabled" sx={{ fontSize: 48, marginBottom: 1 }} />
+                        <Typography color="textPrimary" variant="body1" sx={{ fontWeight: 500 }}>
+                            { t("NoMessages") }
+                        </Typography>
+                        <Typography 
+                            sx={{ marginTop: '8px' }} 
+                            variant="body2" 
+                            color="textSecondary"
+                        >
                             { t("WriteSomeThing") }
                         </Typography>
                     </Box>

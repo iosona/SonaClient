@@ -11,7 +11,10 @@ import { useEffect } from 'react';
 import AboutButton from './components/AboutButton';
 import { WinIconButton } from './components/WinIconButton';
 import { Settings } from '@mui/icons-material';
-import SettingsModal from './components/SettingsModal';
+import SettingsModal from './components/Settings/SettingsModal';
+
+const WINDOW_WIDTH_NAME = "windowWidth"
+const WINDOW_HEIGHT_NAME = "windowHeight";
 
 function App() {
   const { roomId } = useStorage();
@@ -23,6 +26,22 @@ function App() {
       clientVerificationModal.handleOpen();
     }
   }, [isVerificationError]);
+
+  useEffect(() => {
+    const handleWindowResize = () => {
+      localStorage.setItem(WINDOW_WIDTH_NAME, window.innerWidth.toString());
+      localStorage.setItem(WINDOW_HEIGHT_NAME, window.innerHeight.toString());
+    }
+
+    window.api.resizeWindow(
+      Number(localStorage.getItem(WINDOW_WIDTH_NAME)) || 700,
+      Number(localStorage.getItem(WINDOW_HEIGHT_NAME)) || 600
+    );
+    window.addEventListener("resize", handleWindowResize);
+    return () => {
+      window.removeEventListener("resize", handleWindowResize);
+    }
+  }, []);
 
   return (
     <Box sx={{ 

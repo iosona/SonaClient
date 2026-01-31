@@ -6,10 +6,10 @@ export type CreatePeer = (stream: MediaStream, onSignal: OnSignal, onReconnect: 
 export type AddPeer = (incommingSignal: Peer.SignalData, stream: MediaStream, onSignal: OnSignal) => Instance;
 
 export const useP2P = () => {
-    const createPeer: CreatePeer = (stream, onSignal, onReconnect) => {
+    const createPeer: CreatePeer = (stream, onSignal, _) => {
         const peer: any = new Peer({ initiator: true, trickle: false, stream });
         peer.on('signal', onSignal);
-        peer._pc.oniceconnectionstatechange = () => {
+        /*peer._pc.oniceconnectionstatechange = () => {
             const state = peer._pc.iceConnectionState;
             window.api.sendNotify(`Ice state changed in createPeer: ${state}`, "ICE CHANGE");
             logger.warn(`Ice state changed increatepeer: ${state}`)
@@ -17,7 +17,7 @@ export const useP2P = () => {
                 logger.warn("Connection lost. Reconnecting...");
                 //onReconnect();
             }
-        }
+        }*/
         logger.debug("New peer created");
         return peer;
     }
@@ -26,7 +26,7 @@ export const useP2P = () => {
         const peer: any = new Peer({ initiator: false, trickle: false, stream })
         peer.on('signal', onSignal);
         
-        peer._pc.oniceconnectionstatechange = () => {
+        /*peer._pc.oniceconnectionstatechange = () => {
             const state = peer._pc.iceConnectionState;
             window.api.sendNotify(`Ice state changed in addPeer: ${state}`, "ICE CHANGE");
             logger.warn(`Ice state changed in addPeer: ${state}`)
@@ -34,7 +34,7 @@ export const useP2P = () => {
                 logger.warn("Connection lost. Reconnecting...");
                 //onReconnect();
             }
-        }
+        }*/
 
         peer.signal(incommingSignal);
         logger.debug("Incomming peer added");

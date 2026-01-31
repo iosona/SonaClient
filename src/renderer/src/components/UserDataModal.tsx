@@ -16,6 +16,8 @@ import { WinButton } from "./WinButton";
 import { UserData } from "@renderer/types";
 import { WinIconButton } from "./WinIconButton";
 import { useTranslation } from "react-i18next";
+import { WinToggle } from "./WinToggle";
+import { useStorage } from "@renderer/providers/useStorage";
 
 export interface UserDataModalProps extends Omit<ModalWindowProps, 'children'>
 {
@@ -31,6 +33,10 @@ export default function UserDataModal({
   const [selectedAvatar, setSelectedAvatar] = useState<string | null>(null);
   const avatarSrc = getAvatarSrcById(selectedAvatar);
   const { t } = useTranslation();
+  const {
+    setIsVoiceChange,
+    isVoiceChange
+  } = useStorage();
 
   const handleClose = () => onClose && onClose({}, "escapeKeyDown");
 
@@ -53,8 +59,7 @@ export default function UserDataModal({
         sx={{ 
           position: 'absolute', 
           right: 8, 
-          top: 8, 
-          color: 'rgba(255,255,255,0.5)'
+          top: 8
         }}
       >
         <Close fontSize="small" />
@@ -69,7 +74,7 @@ export default function UserDataModal({
         </Typography>
 
         <form onSubmit={handleSubmit}>
-          <Stack spacing={3} alignItems="center">
+          <Stack spacing={2} alignItems="center">
             <Box sx={{ position: 'relative' }}>
               <Box sx={{ position: 'relative' }}>
                 <Avatar 
@@ -156,6 +161,10 @@ export default function UserDataModal({
                   { t("NoPhotos") }
                 </Typography>
               }
+            </Box>
+            <Box sx={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+                <Typography color="textDisabled" variant="caption">{t("VoiceAnonymous")}</Typography>
+                <WinToggle checked={isVoiceChange} onChange={(_, checked) => setIsVoiceChange(checked)} />
             </Box>
             <WinTextField
               fullWidth

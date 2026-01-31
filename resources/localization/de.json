@@ -64,5 +64,12 @@
     "You": "Du",
     "NewMessage": "Neue Nachricht",
     "EnterRoomID": "Raum-ID eingeben",
-    "TermsOfUse": "Nutzungsbedingungen: "
+    "TermsOfUse": "Nutzungsbedingungen: ",
+    "Quality": "Qualität",
+    "QualityText": "Höhere Qualität erhöht die CPU- und Netzwerclast",
+    "FPS": "Bildrate (FPS)",
+    "FPSText": "Niedrige FPS sind stabiler bei schwachem Internet",
+    "VoiceAnonymous": "Stimmanonymisierung",
+    "Select": "Auswählen",
+    "DownloadNow": "Jetzt herunterladen?"
 }

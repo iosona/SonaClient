@@ -11,7 +11,8 @@ const api = {
     thumbnailSize: { width: 150, height: 100 }
   }),
   sendNotify: (title: string, body: string) => ipcRenderer.send('notify', title, body),
-  openUrl: (url: string) => shell.openExternal(url)
+  openUrl: (url: string) => shell.openExternal(url),
+  resizeWindow: (w: number, h: number) => ipcRenderer.send('resize', w, h)
 }
 
 if (process.contextIsolated) {

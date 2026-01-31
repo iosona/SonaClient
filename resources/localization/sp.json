@@ -64,5 +64,12 @@
     "You": "Tú",
     "NewMessage": "Nuevo mensaje",
     "EnterRoomID": "Ingrese el ID de la sala",
-    "TermsOfUse": "Términos de uso: "
+    "TermsOfUse": "Términos de uso: ",
+    "Quality": "Calidad",
+    "QualityText": "Una mayor calidad aumenta la carga del procesador y la red",
+    "FPS": "Fotogramas (FPS)",
+    "FPSText": "Menos FPS mejora la estabilidad con internet lento",
+    "VoiceAnonymous": "Anonimato de voz",
+    "Select": "Seleccionar",
+    "DownloadNow": "¿Descargar ahora?"
 }

@@ -64,5 +64,12 @@
     "You": "You",
     "NewMessage": "New message",
     "EnterRoomID": "Enter room id",
-    "TermsOfUse": "Terms of Use: "
+    "TermsOfUse": "Terms of Use: ",
+    "Quality": "Quality",
+    "QualityText": "Higher quality increases CPU and network load",
+    "FPS": "Frame Rate (FPS)",
+    "FPSText": "Lower FPS is more stable on weak connections",
+    "VoiceAnonymous": "Voice Anonymization",
+    "Select": "Select",
+    "DownloadNow": "Download now?"
 }

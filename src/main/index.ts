@@ -6,6 +6,7 @@ import { showNotify } from './notify';
 import { chmodSync, copyFileSync, existsSync, writeFileSync } from 'fs';
 import path from 'path';
 import { setupUpdater } from './updater';
+import { getLocalizationContext } from './localization';
 
 let mainWindow: BrowserWindow;
 let displayId: string | null = null;
@@ -68,6 +69,7 @@ function initMainIpc() {
         image: src.thumbnail.toDataURL(),
     }));
   });
+  ipcMain.on('resize', (_, w, h) => mainWindow.setSize(w, h))
 }
 
 function displayMediaHandler() {
@@ -124,13 +126,14 @@ async function createWindow() {
     mainWindow.show()
   })
 
-  mainWindow.on('close', e => {
+  mainWindow.on('close', async (e) => {
     e.preventDefault();
+    const context = await getLocalizationContext(mainWindow);
     const response = dialog.showMessageBoxSync(mainWindow, {
         type: 'question',
-        buttons: ['Выйти', 'Отмена'],
-        title: 'Выход',
-        message: 'Вы действительно хотите выйти?',
+        buttons: [context.Quit, context.Cancel],
+        title: context.ExitTitle,
+        message: context.ExitConfirm,
     });
  
     if (response === 0) {
@@ -155,7 +158,7 @@ async function createWindow() {
 
 app.whenReady().then(async () => {
   integrateAppImage();
-  setupUpdater();
+  setupUpdater(mainWindow);
 
   if (process.platform === 'win32') {
     electronApp.setAppUserModelId('com.sona.app')

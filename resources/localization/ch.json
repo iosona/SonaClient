@@ -64,6 +64,12 @@
     "You": "您",
     "NewMessage": "新消息",
     "EnterRoomID": "输入房间 ID",
-    "TermsOfUse": "使用条款 "
-
+    "TermsOfUse": "使用条款 ",
+    "Quality": "画质",
+    "QualityText": "画质越高，CPU和网络负载越大",
+    "FPS": "帧率 (FPS)",
+    "FPSText": "低帧率在弱网环境下更稳定",
+    "VoiceAnonymous": "声音匿名化",
+    "Select": "选择",
+    "DownloadNow": "现在下载吗？"
 }

@@ -47,3 +47,7 @@ export function getUIFromVolume(volume: number) {
     }
     return undefined
 }
+
+export function getRandomInteger(min: number, max: number) {
+    return Math.random() * (max - min) + min;
+};
