@@ -6,6 +6,7 @@ import * as Tone from 'tone';
 
 export const useAudioStream = () => {
     const [stream, setStream] = useState<MediaStream | null>(null);
+    const [mic, setMic] = useState<Tone.UserMedia | null>(null);
     const { mediaDevsIds, isVoiceChange } = useStorage();
 
     useEffect(() => {
@@ -15,8 +16,9 @@ export const useAudioStream = () => {
     const createAnonymousAudioStream = async () => {
         await Tone.start();
   
-        const mic = new Tone.UserMedia();
-        await mic.open();
+        const micro = new Tone.UserMedia();
+        setMic(micro);
+        await micro.open();
 
         const compressor = new Tone.Compressor({
             threshold: -24,
@@ -33,7 +35,7 @@ export const useAudioStream = () => {
         const audioCtx = Tone.getContext().rawContext as AudioContext;
         const dest = audioCtx.createMediaStreamDestination();
 
-        mic.chain(compressor, pitchShift, volumeBoost, dest);
+        micro.chain(compressor, pitchShift, volumeBoost, dest);
         
         return dest.stream;
     }
@@ -59,6 +61,11 @@ export const useAudioStream = () => {
         if (!stream) return;
         stream.getTracks().forEach(track => track.stop());
         setStream(null);
+        if (mic) {
+            mic.close();
+            mic.dispose();
+            setMic(null);
+        }
         logger.debug("Audio stream destroyed");
     }
 

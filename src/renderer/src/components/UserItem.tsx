@@ -27,7 +27,7 @@ const UserItem: FC<UserItemProps> = ({
     const { mediaDevsIds } = useStorage();
     const [isSpeaking, setIsSpeaking] = useState<boolean>(false);
     const [volume, setVolume] = useState<number>(100);
-    const { t } = useTranslation();
+    const { t, i18n } = useTranslation();
 
     const isMe = socket?.id === client.id;
     const soundUI = useMemo(() => getUIFromVolume(volume), [volume]);
@@ -55,7 +55,7 @@ const UserItem: FC<UserItemProps> = ({
             color: 'primary',
             label: t("Listen")
         }
-    }, [client, isSpeaking]);
+    }, [client, isSpeaking, i18n.language]);
 
     useEffect(() => {
         if (!client.audioStream || !audioRef.current) {
@@ -145,7 +145,7 @@ const UserItem: FC<UserItemProps> = ({
                         </Typography>
                     }
                     secondary={
-                        <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                        <Box sx={{ display: 'flex', justifyContent: 'space-between', textTransform: 'lowercase' }}>
                             <Typography variant="caption" color={userStatus.color} sx={{
                                 display: 'flex',
                                 gap: '4px'

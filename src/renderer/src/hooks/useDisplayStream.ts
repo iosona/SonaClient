@@ -70,7 +70,6 @@ export const useDisplayStream = (displayInfo: DisplayInfo | null) => {
         updateQuality(getResolution(), sharingFPS);
     }, [sharingFPS, sharingQuality]);
 
-
     return {
         stream,
         isError,

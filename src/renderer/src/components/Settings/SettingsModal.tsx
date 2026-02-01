@@ -8,6 +8,7 @@ import { WinButton } from "../WinButton";
 import { useTranslation } from "react-i18next";
 import { SettingsCategory } from "./SettingsCategory";
 import { FPS_RANGE, LANGUAGES, QUALITY } from "@renderer/constants";
+import KeyBind from "../KeyBInd/KeyBind";
 
 export interface SettingsModalProps {
     children: JSX.Element
@@ -141,6 +142,22 @@ const SettingsModal: FC<SettingsModalProps> = ({
                                 ))
                             }
                         </WinSelect>
+                    </SettingsCategory>
+
+                    <SettingsCategory title="Горячие клавиши">
+                        <List sx={{
+                            display: 'flex',
+                            flexDirection: 'column',
+                            gap: '8px',
+                            marginLeft: '25px'
+                        }}>
+                            <KeyBind label="Быстро включить/выключить микрофон" keybind="CTRL + D" />
+                            <KeyBind label="Экстренно отключится от звонка" keybind="CTRL + Q" />
+                            <KeyBind label="Очистить чат" keybind="CTRL + K" />
+                            <KeyBind label="Включить/выключить звук всем участникам" keybind="CTRL + B" />
+                            <KeyBind label="Открыть/закрыть чат" keybind="CTRL + E" />
+                            <KeyBind label="Завершить демонстрацию экрана" keybind="CTRL + S" />
+                        </List>
                     </SettingsCategory>
 
                     <SettingsCategory title={ t("SoundOutput") }>

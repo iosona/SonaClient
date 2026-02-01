@@ -17,8 +17,7 @@ export const useCallEvents = (
         createClient, 
         deleteClient,
         updateClient,
-        setMessages,
-        cleanClient
+        setMessages
     } = useStorage();
     const { emitEvent, socket } = useSocket();
     const { createPeer, addPeer, addStreamToPeer } = useP2P();
@@ -30,16 +29,16 @@ export const useCallEvents = (
             initialStream, 
             (signal) => emitEvent(EmitEvent.SIGNAL, { signal, toUserId: data.userId }),
             () => {
-                const client = clientsRef.current.find(c => c.id === data.userId);
+                /*const client = clientsRef.current.find(c => c.id === data.userId);
                 if (!client) return;
                 cleanClient(client);
-                //peer?.destroy();
-                //peer = null;
-                //updateClient(data.userId, 'peer', null);
-                updateClient(client.id, 'peer', null);
                 updateClient(client.id, 'audioStream', null);
-                updateClient(client.id, 'displayStream', null)
-                emitEvent(EmitEvent.ICERECONNECT, { toUserId: data.userId })
+                updateClient(client.id, 'displayStream', null);
+                updateClient(client.id, 'peer', null);
+                updateClient(client.id, 'isStreamReady', false);
+
+                emitEvent(EmitEvent.ICERECONNECT, { toUserId: client.id });
+                logger.warn("Ice reconnect started.");*/
             }
         );
         return peer;
@@ -143,14 +142,15 @@ export const useCallEvents = (
     }
 
     const handleReconnect: EventHandler = (_, data) => {
-        if (!initialStream) return;
+        data;
+        /*if (!initialStream) return;
         const client = clientsRef.current.find(c => c.id === data.userId);
         //client?.peer?.destroy();
         if (!client) return;
         cleanClient(client);
         updateClient(client.id, 'peer', null);
         updateClient(client.id, 'audioStream', null);
-        updateClient(client.id, 'displayStream', null)
+        updateClient(client.id, 'displayStream', null);
         const peer = _utilCreatePeer(initialStream, data);
         updateClient(data.userId, 'peer', peer);
         if (displayStreamRef.current) {
@@ -160,7 +160,7 @@ export const useCallEvents = (
                 }
             })
         }
-        logger.debug("Peer reconnected");
+        logger.debug("Peer reconnected");*/
     }
 
     const handleMute: EventHandler = (_, data) => {

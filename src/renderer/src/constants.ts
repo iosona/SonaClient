@@ -95,3 +95,10 @@ export const FPS_RANGE = [
     25,
     30
 ]
+
+export const ALLOWED_SPECIAL_KEYS = ['CONTROL', 'ALT', 'SHIFT']
+export const ALLOWED_SIMPLE_KEYS = [
+    'A', 'B', 'C', 'D', 'E', 'F', 'G', 'J', 'K', 'L', 'M', 'N', 'O', 
+    'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '1', '2', 
+    '3', '4', '5', '6', '7', '8', '9', '0', '-', '+'
+];
