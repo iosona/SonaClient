@@ -1,6 +1,6 @@
+import { ANONYMOUS_VOICE_PITCH } from "@renderer/constants";
 import { logger } from "@renderer/logger";
 import { useStorage } from "@renderer/providers/useStorage";
-import { getRandomInteger } from "@renderer/utils";
 import { useEffect, useState } from "react";
 import * as Tone from 'tone';
 
@@ -25,9 +25,8 @@ export const useAudioStream = () => {
             ratio: 4
         });
 
-        const randomPitch = getRandomInteger(-6, -3.5);
         const pitchShift = new Tone.PitchShift({
-            pitch: randomPitch
+            pitch: ANONYMOUS_VOICE_PITCH
         });
 
         const volumeBoost = new Tone.Gain(2.5);

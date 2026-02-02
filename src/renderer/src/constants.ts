@@ -105,6 +105,8 @@ export const ALLOWED_SIMPLE_KEYS = [
     '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '+'
 ];
 
+export const ANONYMOUS_VOICE_PITCH = -5;
+
 export const DEFAULT_KEY_BINDS: IKeyBind[] = [
     {
         event: KeyBindEvent.QuickMicroMuteToggle,
