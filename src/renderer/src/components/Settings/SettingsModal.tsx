@@ -9,6 +9,7 @@ import { useTranslation } from "react-i18next";
 import { SettingsCategory } from "./SettingsCategory";
 import { FPS_RANGE, LANGUAGES, QUALITY } from "@renderer/constants";
 import KeyBind from "../KeyBInd/KeyBind";
+import { useKeyBind } from "@renderer/providers/useKeyBind";
 
 export interface SettingsModalProps {
     children: JSX.Element
@@ -47,6 +48,7 @@ const SettingsModal: FC<SettingsModalProps> = ({
         sharingFPS, 
         setSharingFPS,
     } = useStorage();
+    const { keybinds } = useKeyBind();
     const { t, i18n } = useTranslation();
     
     return (
@@ -144,19 +146,21 @@ const SettingsModal: FC<SettingsModalProps> = ({
                         </WinSelect>
                     </SettingsCategory>
 
-                    <SettingsCategory title="Горячие клавиши">
+                    <SettingsCategory title={t("HotKeys")}>
                         <List sx={{
                             display: 'flex',
                             flexDirection: 'column',
                             gap: '8px',
                             marginLeft: '25px'
                         }}>
-                            <KeyBind label="Быстро включить/выключить микрофон" keybind="CTRL + D" />
-                            <KeyBind label="Экстренно отключится от звонка" keybind="CTRL + Q" />
-                            <KeyBind label="Очистить чат" keybind="CTRL + K" />
-                            <KeyBind label="Включить/выключить звук всем участникам" keybind="CTRL + B" />
-                            <KeyBind label="Открыть/закрыть чат" keybind="CTRL + E" />
-                            <KeyBind label="Завершить демонстрацию экрана" keybind="CTRL + S" />
+                            {
+                                keybinds.map(bind => (
+                                    <KeyBind 
+                                        key={bind.event}
+                                        keybind={bind}
+                                    />
+                                ))
+                            }
                         </List>
                     </SettingsCategory>
 

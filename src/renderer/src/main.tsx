@@ -7,19 +7,22 @@ import { SocketProvider } from './providers/SocketProvider'
 import { CustomThemeProvider } from './providers/ThemeProvider'
 import { Buffer } from 'buffer'
 import './i18n'
+import { KeyBindProvider } from './providers/KeyBindProvider'
 
 window.Buffer = Buffer
 window.process = process;
 
 createRoot(document.getElementById('root')!)
   .render(
-    <SnackbarProvider>
-      <StorageProvider>
-        <SocketProvider>
-          <CustomThemeProvider>
-            <App />
-          </CustomThemeProvider>
-        </SocketProvider>
-      </StorageProvider>
+    <SnackbarProvider maxSnack={3}>
+      <KeyBindProvider>
+        <StorageProvider>
+          <SocketProvider>
+            <CustomThemeProvider>
+              <App />
+            </CustomThemeProvider>
+          </SocketProvider>
+        </StorageProvider>
+      </KeyBindProvider>
     </SnackbarProvider>
   )

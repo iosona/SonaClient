@@ -7,20 +7,23 @@ import { WinButton } from "../WinButton";
 import { WinIconButton } from "../WinIconButton";
 import { Close } from "@mui/icons-material";
 import { ALLOWED_SIMPLE_KEYS, ALLOWED_SPECIAL_KEYS } from "@renderer/constants";
+import { useKeyBind } from "@renderer/providers/useKeyBind";
+import { IKeyBind } from "@renderer/types";
 
 export interface KeyBindEditorProps {
     children: JSX.Element
-    action: string
+    keybind: IKeyBind
 }
 
 export default function KeyBindEditor({
     children,
-    action
+    keybind
 }: KeyBindEditorProps) {
   const { open, handleClose, handleOpen } = useModal();
   const { t } = useTranslation();
   const [keyBind, setKeyBind] = useState<string[]>([]);
-  const [statusText, setStatusText] = useState<string>('Начните вводить свою комбинацию');
+  const { keybinds, updateKeyBind } = useKeyBind();
+  const [isWrongKeyBind, setIsWrongKeyBind] = useState<boolean>(false);
 
   useEffect(() => {
     const handleKeydown = (e: KeyboardEvent) => {
@@ -41,6 +44,26 @@ export default function KeyBindEditor({
     return () => window.removeEventListener("keydown", handleKeydown);
   }, [open]);
 
+  useEffect(() => {
+    if (keyBind.length !== 2) return;
+    if (keybinds.find(bind => {
+        const firstKey = keyBind[0] === "CTRL" ? "CONTROL" : keyBind[0];
+        return bind.keys[0] === firstKey && bind.keys[1] === keyBind[1]
+    })) {
+        setIsWrongKeyBind(true);
+    }
+    else {
+        setIsWrongKeyBind(false)
+    }
+  }, [keybinds, keyBind]);
+
+  const handleOk = () => {
+    if (isWrongKeyBind || keyBind.length !== 2) return;
+    updateKeyBind(keybind.event, { keys: [keyBind[0] === "CTRL" ? "CONTROL" : keyBind[0], keyBind[1]] });
+    handleClose();
+    setKeyBind([]);
+  }
+
   return (
     <>
         <children.type {...children.props} onClick={handleOpen} />
@@ -58,10 +81,10 @@ export default function KeyBindEditor({
             </WinIconButton>
             
             <Typography variant="body1" sx={{ fontWeight: 600, color: '#fff' }}>
-                Изменить горячую клавишу
+                { t("ChangeHotKey") }
             </Typography>
             <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.6)', mb: 3 }}>
-                Действие: <b>{ action }</b>
+                { t("Action") }<b>{ t(keybind.event) }</b>
             </Typography>
 
             <Box sx={{
@@ -94,9 +117,13 @@ export default function KeyBindEditor({
 
             <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', gap: 1.5, marginTop: '20px' }}>
                 <Typography variant="caption" color="textDisabled">
-                    { statusText }
+                    { 
+                        isWrongKeyBind
+                        ? t("HotKeyIsAlreadyInUse")
+                        : t("StartEnterHotKey")
+                    }
                 </Typography>
-                <WinButton accent fullWidth>
+                <WinButton disabled={isWrongKeyBind} accent fullWidth onClick={handleOk}>
                     { t("OK") }
                 </WinButton>
             </Box>

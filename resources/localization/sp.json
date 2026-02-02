@@ -71,5 +71,16 @@
     "FPSText": "Menos FPS mejora la estabilidad con internet lento",
     "VoiceAnonymous": "Anonimato de voz",
     "Select": "Seleccionar",
-    "DownloadNow": "¿Descargar ahora?"
+    "DownloadNow": "¿Descargar ahora?",
+    "ChangeHotKey": "Cambiar atajo",
+    "Action": "Acción: ",
+    "HotKeyIsAlreadyInUse": "Esta combinación ya está en uso",
+    "StartEnterHotKey": "Comience a introducir su combinación",
+    "HotKeys": "Atajos de teclado",
+    "QuickMicroMuteToggle": "Activar/desactivar silencio del micrófono rápido",
+    "LeaveFromCall": "Salir de la llamada de emergencia",
+    "ClearChat": "Limpiar chat",
+    "MembersMuteToggle": "Silenciar/activar sonido para todos",
+    "ChatOpenToggle": "Abrir/cerrar chat",
+    "StopScreenSharing": "Detener pantalla compartida"
 }

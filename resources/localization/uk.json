@@ -71,5 +71,16 @@
     "FPSText": "Низький FPS — стабільніше при слабкому інтернеті",
     "VoiceAnonymous": "Анонімність голосу",
     "Select": "Вибрати",
-    "DownloadNow": "Завантажити зараз?"
+    "DownloadNow": "Завантажити зараз?",
+    "ChangeHotKey": "Змінити гарячу клавішу",
+    "Action": "Дія: ",
+    "HotKeyIsAlreadyInUse": "Ця комбінація вже зайнята",
+    "StartEnterHotKey": "Почніть вводити свою комбінацію",
+    "HotKeys": "Гарячі клавіші",
+    "QuickMicroMuteToggle": "Швидко увімкнути/вимкнути мікрофон",
+    "LeaveFromCall": "Екстрено відключитися від дзвінка",
+    "ClearChat": "Очистити чат",
+    "MembersMuteToggle": "Увімкнути/вимкнути звук усім учасникам",
+    "ChatOpenToggle": "Відкрити/закрити чат",
+    "StopScreenSharing": "Завершити демонстрацію екрана"
 }

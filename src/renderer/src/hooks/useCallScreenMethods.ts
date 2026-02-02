@@ -10,6 +10,8 @@ import { useDisplayStream } from '@renderer/hooks/useDisplayStream';
 import { useCallEvents } from '@renderer/hooks/useCallEvents';
 import { logger } from '@renderer/logger';
 import { useCallTimer } from '@renderer/hooks/useCallTimer'
+import { useKeyBind } from '@renderer/providers/useKeyBind';
+import { KeyBindEvent } from '@renderer/enums';
 
 export const useCallScreenMethods = () => {
     const { 
@@ -19,6 +21,7 @@ export const useCallScreenMethods = () => {
         getSharingClient,
         isMuted,
         mediaDevsIds,
+        setMessages,
         messages
     } = useStorage();
     const { isConnected, subscribeEvent, emitEvent, unsubscribeEvent, socket } = useSocket();
@@ -33,6 +36,8 @@ export const useCallScreenMethods = () => {
     const screenSelector = useModal();
     const [isMessage, setIsMessage] = useState<boolean>(false);
     const connectionLostModal = useModal();
+    const [isAllMuted, setIsAllMuted] = useState<boolean>(false);
+    const { updateKeyBind } = useKeyBind();
     const callTime = useCallTimer(true);
     const {
         handleDisconnect, 
@@ -157,11 +162,12 @@ export const useCallScreenMethods = () => {
     }, [isConnected, stream]);
 
     const stopDisplaySharing = () => {
-        setDisplayInfo(null);
+        setDisplayInfo(null)
+        emitEvent(EmitEvent.SHARE, { isShared: false });
         if (!displayStream) return;
         for (const client of clients) {
             if (client.peer) {
-            removeStreamFromPeer(client.peer, displayStream);
+                removeStreamFromPeer(client.peer, displayStream);
             }
         }
         stopDisplayStream();
@@ -193,7 +199,6 @@ export const useCallScreenMethods = () => {
 
     const handleShareClick = () => {
         if (sharingClient?.id === socket?.id) {
-            emitEvent(EmitEvent.SHARE, { isShared: false });
             stopDisplaySharing();
             logger.debug("Video tracks removed");
             return;
@@ -210,6 +215,22 @@ export const useCallScreenMethods = () => {
             });
         }
     }
+
+    const handleToggleMuteAll = () => {
+        for (const client of clients) {
+            updateClient(client.id, 'volume', isAllMuted ? 100 : 0);
+        }
+        setIsAllMuted(prev => !prev);
+    }
+
+    useEffect(() => {
+        updateKeyBind(KeyBindEvent.QuickMicroMuteToggle, { action: muteMe });
+        updateKeyBind(KeyBindEvent.ChatOpenToggle, { action: () => setIsMessage(prev => !prev) });
+        updateKeyBind(KeyBindEvent.ClearChat, { action: () => setMessages([]) });
+        updateKeyBind(KeyBindEvent.StopScreenSharing, { action: () => stopDisplaySharing() });
+        updateKeyBind(KeyBindEvent.MembersMuteToggle, { action: () => handleToggleMuteAll() });
+        updateKeyBind(KeyBindEvent.LeaveFromCall, { action: () => leave() });
+    }, [clients, displayStream, stream]);
 
     return {
         isMeMuted,

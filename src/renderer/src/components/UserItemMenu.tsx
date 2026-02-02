@@ -2,7 +2,7 @@ import { Box, Menu, Stack, Typography } from "@mui/material";
 import { useMenu } from "@renderer/hooks/useMenu";
 import { UserData } from "@renderer/types";
 import { getAvatarSrcById, getHexColorByUsername, getUIFromVolume } from "@renderer/utils";
-import { FC, JSX, useEffect, useMemo, useState } from "react";
+import { FC, JSX, useMemo } from "react";
 import WinSlider from "./WinSlider";
 
 export interface UserItemMenuProps {
@@ -10,22 +10,20 @@ export interface UserItemMenuProps {
     onVolumeChange?: (volume: number) => void;
     isActive?: boolean
     userData: UserData
+    volume: number
 }
 
 const UserItemMenu: FC<UserItemMenuProps> = ({
     children,
     onVolumeChange,
+    volume,
     userData,
     isActive = true
 }) => {
     const { anchorEl, open, handleClose, handleOpen } = useMenu();
-    const [volume, setVolume] = useState<number>(100);
 
     const data = useMemo(() => getUIFromVolume(volume), [volume]);
 
-    useEffect(() => {
-        onVolumeChange && onVolumeChange(volume);
-    }, [volume]);
 
     return (
         <>
@@ -109,7 +107,7 @@ const UserItemMenu: FC<UserItemMenuProps> = ({
                             }
                             <WinSlider
                                 value={volume}
-                                onChange={(_, val: any) => setVolume(val)} 
+                                onChange={(_, val: any) => onVolumeChange && onVolumeChange(val)} 
                                 min={0}
                                 color={data?.color as any}
                                 max={100}

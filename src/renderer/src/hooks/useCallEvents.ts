@@ -129,6 +129,7 @@ export const useCallEvents = (
             isShared: false,
             audioStream: null,
             displayStream: null,
+            volume: 100,
             peer
         })
 

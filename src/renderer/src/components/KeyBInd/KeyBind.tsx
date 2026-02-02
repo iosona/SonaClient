@@ -3,20 +3,22 @@ import { FC } from "react";
 import { WinIconButton } from "../WinIconButton";
 import { Edit } from "@mui/icons-material";
 import KeyBindEditor from "./KeyBindEditor";
+import { IKeyBind } from "@renderer/types";
+import { useTranslation } from "react-i18next";
 
 export interface KeyBindProps extends BoxProps {
-    keybind: string;
-    label: string;
+    keybind: IKeyBind
     onBindChange?: (newBind: string) => void;
 }
 
 const KeyBind: FC<KeyBindProps> = ({
     keybind,
-    label,
     onBindChange,
     sx,
     ...props
 }) => {
+    const { t } = useTranslation();
+
     return (
         <Box sx={{
             display: 'flex',
@@ -26,7 +28,7 @@ const KeyBind: FC<KeyBindProps> = ({
             justifyContent: 'space-between'
         }} {...props}>
             <Typography variant="subtitle2">
-                { label }
+                { t(keybind.event) }
             </Typography>
             <Paper sx={{
                 paddingLeft: '5px',
@@ -36,9 +38,9 @@ const KeyBind: FC<KeyBindProps> = ({
                 boxShadow: 'none'
             }}>
                 <Typography variant="caption" color="textDisabled">
-                    { keybind }
+                    { keybind.keys.map(key => key === "CONTROL" ? "CTRL" : key).join(" + ") }
                 </Typography>
-                <KeyBindEditor action={label}>
+                <KeyBindEditor keybind={keybind}>
                     <WinIconButton sx={{
                         background: 'transparent',
                         border: 'none',

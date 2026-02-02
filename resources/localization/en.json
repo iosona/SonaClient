@@ -71,5 +71,16 @@
     "FPSText": "Lower FPS is more stable on weak connections",
     "VoiceAnonymous": "Voice Anonymization",
     "Select": "Select",
-    "DownloadNow": "Download now?"
+    "DownloadNow": "Download now?",
+    "ChangeHotKey": "Change Hotkey",
+    "Action": "Action: ",
+    "HotKeyIsAlreadyInUse": "This combination is already in use",
+    "StartEnterHotKey": "Start entering your combination",
+    "HotKeys": "Hotkeys",
+    "QuickMicroMuteToggle": "Quick microphone mute toggle",
+    "LeaveFromCall": "Emergency leave from call",
+    "ClearChat": "Clear chat",
+    "MembersMuteToggle": "Mute/unmute all members",
+    "ChatOpenToggle": "Open/close chat",
+    "StopScreenSharing": "Stop screen sharing"
 }

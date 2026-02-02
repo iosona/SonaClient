@@ -72,5 +72,16 @@
     "FPSText": "Низкий FPS - стабильнее при слабом интернете",
     "VoiceAnonymous": "Анонимность голоса",
     "Select": "Выбрать",
-    "DownloadNow": "Скачать сейчас?"
+    "DownloadNow": "Скачать сейчас?",
+    "ChangeHotKey": "Изменить горячую клавишу",
+    "Action": "Действие: ",
+    "HotKeyIsAlreadyInUse": "Данная комбинация уже занята",
+    "StartEnterHotKey": "Начните вводить свою комбинацию",
+    "HotKeys": "Горячие клавиши",
+    "QuickMicroMuteToggle": "Быстро включить/выключить микрофон",
+    "LeaveFromCall": "Экстренно отключится от звонка",
+    "ClearChat": "Очистить чат",
+    "MembersMuteToggle": "Включить/выключить звук всем участникам",
+    "ChatOpenToggle": "Открыть/закрыть чат",
+    "StopScreenSharing": "Завершить демонстрацию экрана"
 }

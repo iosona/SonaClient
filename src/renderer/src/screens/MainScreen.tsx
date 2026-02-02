@@ -35,16 +35,21 @@ const MainScreen: FC = () => {
                 peer: null,
                 isStreamReady: user.id === socket?.id,
                 audioStream: null,
-                displayStream: null
+                displayStream: null,
+                volume: 100
             })));
         }
 
         const joinRoomHandler: EventHandler = (status, data) => {
             switch(status) {
                 case EmitStatus.ERROR:
+                    let errorMessage = t("UnknownError");
+                    if (typeof data.detail === 'string' && data.detail.includes("not found")) {
+                        errorMessage = t("RoomNotFound");
+                    }
                     enqueueSnackbar({
                         variant: 'error',
-                        message: t("RoomNotFound")
+                        message: errorMessage
                     });
                     break;
                 case EmitStatus.SUCCESS:
@@ -56,9 +61,14 @@ const MainScreen: FC = () => {
         const createRoomHandler: EventHandler = (status, data) => {
              switch(status) {
                 case EmitStatus.ERROR:
+                    let errorDetail = data.detail;
+                
+                    if (typeof data.detail === 'object') {
+                        errorDetail = t("UnknownError");
+                    }
                     enqueueSnackbar({
                         variant: 'error',
-                        message: `${t("Error")}${data.detail}`
+                        message: errorDetail
                     });
                     break;
                 case EmitStatus.SUCCESS:
@@ -71,7 +81,8 @@ const MainScreen: FC = () => {
                         isShared: false,
                         isStreamReady: true,
                         displayStream: null,
-                        audioStream: null
+                        audioStream: null,
+                        volume: 100
                     });
                     break;
             }

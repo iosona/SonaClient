@@ -20,6 +20,7 @@ export interface ServerClient {
 
 export interface Client extends ServerClient {
     peer: Instance | null;
+    volume: number;
     audioStream: MediaStream | null;
     displayStream: MediaStream | null;
     isStreamReady?: boolean;
@@ -30,4 +31,10 @@ export interface MessageItem {
     message: string
     id: string;
     isRead: boolean;
+}
+
+export interface IKeyBind {
+    event: string;
+    keys: string[];
+    action?: () => void;
 }

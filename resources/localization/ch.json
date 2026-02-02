@@ -71,5 +71,16 @@
     "FPSText": "低帧率在弱网环境下更稳定",
     "VoiceAnonymous": "声音匿名化",
     "Select": "选择",
-    "DownloadNow": "现在下载吗？"
+    "DownloadNow": "现在下载吗？",
+    "ChangeHotKey": "修改热键",
+    "Action": "操作：",
+    "HotKeyIsAlreadyInUse": "此组合键已被占用",
+    "StartEnterHotKey": "开始输入您的组合键",
+    "HotKeys": "热键",
+    "QuickMicroMuteToggle": "快速静音/取消静音麦克风",
+    "LeaveFromCall": "紧急退出通话",
+    "ClearChat": "清空聊天记录",
+    "MembersMuteToggle": "全员静音/取消静音",
+    "ChatOpenToggle": "打开/关闭聊天",
+    "StopScreenSharing": "停止屏幕共享"
 }

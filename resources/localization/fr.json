@@ -71,5 +71,16 @@
     "FPSText": "Un FPS bas est plus stable avec une connexion faible",
     "VoiceAnonymous": "Anonymat de la voix",
     "Select": "Sélectionner",
-    "DownloadNow": "Télécharger maintenant ?"
+    "DownloadNow": "Télécharger maintenant ?",
+    "ChangeHotKey": "Modifier le raccourci",
+    "Action": "Action : ",
+    "HotKeyIsAlreadyInUse": "Cette combinaison est déjà utilisée",
+    "StartEnterHotKey": "Commencez à saisir votre combinaison",
+    "HotKeys": "Raccourcis clavier",
+    "QuickMicroMuteToggle": "Activer/désactiver rapidement le micro",
+    "LeaveFromCall": "Quitter l'appel d'urgence",
+    "ClearChat": "Effacer le chat",
+    "MembersMuteToggle": "Activer/désactiver le son pour tous",
+    "ChatOpenToggle": "Ouvrir/fermer le chat",
+    "StopScreenSharing": "Arrêter le partage d'écran"
 }

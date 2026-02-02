@@ -28,7 +28,7 @@ export const WinToggle = styled(Switch)(() => ({
             '& .MuiSwitch-thumb': {
                 backgroundColor: '#000',
                 width: 10,
-                height: 10,
+                height: 10
             },
         },
         '&.Mui-disabled .MuiSwitch-thumb': {
@@ -39,8 +39,8 @@ export const WinToggle = styled(Switch)(() => ({
     '& .MuiSwitch-thumb': {
         boxShadow: 'none',
         backgroundColor: '#fff',
-        width: 8,
-        height: 8,
+        width: 10,
+        height: 10,
         borderRadius: '50%',
         transition: 'all 0.2s ease',
     },

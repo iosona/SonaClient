@@ -54,7 +54,7 @@ const Message: FC<MessageProps> = ({
                     const url = event.currentTarget.href;
                     window.api.openUrl(url);
                 }
-            },
+        },
         render: ({ attributes, content }) => {
             const { href, ...props } = attributes;
             return (

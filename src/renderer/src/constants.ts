@@ -7,6 +7,8 @@ import avatar6 from './avatars/a6.jpg'
 import avatar7 from './avatars/a7.jpg'
 import avatar8 from './avatars/a8.jpg'
 import appIcon from '../../../resources/sona.png'
+import { IKeyBind } from './types'
+import { KeyBindEvent } from './enums'
 
 export const GITHUB_URL = "https://github.com/iosona/SonaClient"
 export const TERMS_OF_USE_URL = "https://github.com/iosona/SonaClient/blob/main/TermsOfUse.txt"
@@ -98,7 +100,34 @@ export const FPS_RANGE = [
 
 export const ALLOWED_SPECIAL_KEYS = ['CONTROL', 'ALT', 'SHIFT']
 export const ALLOWED_SIMPLE_KEYS = [
-    'A', 'B', 'C', 'D', 'E', 'F', 'G', 'J', 'K', 'L', 'M', 'N', 'O', 
-    'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '1', '2', 
-    '3', '4', '5', '6', '7', '8', '9', '0', '-', '+'
+    'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'J', 'K', 'L', 'M', 'N', 'O', 
+    'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'I', 'X', 'Y', 'Z', 
+    '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '+'
 ];
+
+export const DEFAULT_KEY_BINDS: IKeyBind[] = [
+    {
+        event: KeyBindEvent.QuickMicroMuteToggle,
+        keys: ["CONTROL", "D"]
+    },
+    {
+        event: KeyBindEvent.LeaveFromCall,
+        keys: ["CONTROL", "H"]
+    },
+    {
+        event: KeyBindEvent.ClearChat,
+        keys: ["CONTROL", 'K']
+    },
+    {
+        event: KeyBindEvent.MembersMuteToggle,
+        keys: ["CONTROL", "B"]
+    },
+    {
+        event: KeyBindEvent.ChatOpenToggle,
+        keys: ["CONTROL", "E"]
+    },
+    {
+        event: KeyBindEvent.StopScreenSharing,
+        keys: ["CONTROL", "S"]
+    }
+]

@@ -71,5 +71,16 @@
     "FPSText": "Niedrige FPS sind stabiler bei schwachem Internet",
     "VoiceAnonymous": "Stimmanonymisierung",
     "Select": "Auswählen",
-    "DownloadNow": "Jetzt herunterladen?"
+    "DownloadNow": "Jetzt herunterladen?",
+    "ChangeHotKey": "Hotkey ändern",
+    "Action": "Aktion: ",
+    "HotKeyIsAlreadyInUse": "Diese Kombination wird bereits verwendet",
+    "StartEnterHotKey": "Beginnen Sie mit der Eingabe Ihrer Kombination",
+    "HotKeys": "Hotkeys",
+    "QuickMicroMuteToggle": "Mikrofon schnell ein-/ausschalten",
+    "LeaveFromCall": "Notfall-Anruf verlassen",
+    "ClearChat": "Chat leeren",
+    "MembersMuteToggle": "Ton für alle Teilnehmer ein-/ausschalten",
+    "ChatOpenToggle": "Chat öffnen/schließen",
+    "StopScreenSharing": "Bildschirmfreigabe beenden"
 }

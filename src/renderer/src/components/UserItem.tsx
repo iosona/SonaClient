@@ -24,13 +24,12 @@ const UserItem: FC<UserItemProps> = ({
     const color = useMemo(() => getHexColorByUsername(client.userData.userName), [client]);
     const audioRef = useRef<HTMLAudioElement>(null);
     const { socket } = useSocket();
-    const { mediaDevsIds } = useStorage();
+    const { mediaDevsIds, updateClient } = useStorage();
     const [isSpeaking, setIsSpeaking] = useState<boolean>(false);
-    const [volume, setVolume] = useState<number>(100);
     const { t, i18n } = useTranslation();
 
     const isMe = socket?.id === client.id;
-    const soundUI = useMemo(() => getUIFromVolume(volume), [volume]);
+    const soundUI = useMemo(() => getUIFromVolume(client.volume), [client.volume]);
     const userStatus = useMemo(() => {
         if (!client.isStreamReady) {
             return {
@@ -93,14 +92,18 @@ const UserItem: FC<UserItemProps> = ({
         }
     }, [mediaDevsIds.outputAudioDevice]);
 
-    const handleChangeVolume = (_v: number) => {
+    useEffect(() => {
         if (!audioRef.current) return;
-        audioRef.current.volume = _v / 100;
-        setVolume(_v);
-    }
+        audioRef.current.volume = client.volume / 100;
+    }, [client.volume]);
 
     return (
-        <UserItemMenu userData={client.userData} isActive={!isMe} onVolumeChange={handleChangeVolume}>
+        <UserItemMenu 
+            userData={client.userData} 
+            isActive={!isMe} 
+            onVolumeChange={vol => updateClient(client.id, 'volume', vol)}
+            volume={client.volume}
+        >
             <ListItemButton
                 sx={{
                     display: 'flex',
@@ -166,7 +169,7 @@ const UserItem: FC<UserItemProps> = ({
                                         &&
                                         <soundUI.icon sx={{ fontSize: '16px' }} />
                                     }
-                                    <Typography variant="caption">{ volume }%</Typography>
+                                    <Typography variant="caption">{ client.volume }%</Typography>
                                 </Box>    
                             }                      
                         </Box>
