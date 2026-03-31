@@ -12,20 +12,14 @@ import AboutButton from './components/AboutButton';
 import { WinIconButton } from './components/WinIconButton';
 import { Settings } from '@mui/icons-material';
 import SettingsModal from './components/Settings/SettingsModal';
+import { LauncherScreen } from './screens/Launcher/LauncherScreen';
 
 const WINDOW_WIDTH_NAME = "windowWidth"
 const WINDOW_HEIGHT_NAME = "windowHeight";
 
 function App() {
   const { roomId } = useStorage();
-  const { isVerificationError } = useSocket();
-  const clientVerificationModal = useModal();
-
-  useEffect(() => {
-    if (isVerificationError) {
-      clientVerificationModal.handleOpen();
-    }
-  }, [isVerificationError]);
+  const { isAuthed } = useSocket();
 
   useEffect(() => {
     const handleWindowResize = () => {
@@ -51,18 +45,20 @@ function App() {
       justifyContent: 'space-between',
       width: '100%'
     }}>
-      <ClientVerificationModal 
-        open={clientVerificationModal.open} 
-        onClose={clientVerificationModal.handleClose} 
-      />
       <TitleBar />
       {
         roomId
         ?
-        <CallScreen/>
+        <CallScreen />
         :
         <>
-          <MainScreen />
+          {
+            isAuthed
+            ?
+            <MainScreen />
+            :
+            <LauncherScreen />
+          }        
           <AboutButton />
           <SettingsModal>
             <WinIconButton size='small' sx={{
@@ -80,3 +76,26 @@ function App() {
 }
 
 export default App;
+
+/**
+ * {
+        roomId
+        ?
+        <CallScreen/>
+        :
+        <>
+          <AuthScreen />
+          <AboutButton />
+          <SettingsModal>
+            <WinIconButton size='small' sx={{
+              position: 'absolute', 
+              top: 40, 
+              right: 50
+            }}>
+              <Settings fontSize='small' />
+            </WinIconButton>
+          </SettingsModal>
+        </>
+      }
+ * 
+ */

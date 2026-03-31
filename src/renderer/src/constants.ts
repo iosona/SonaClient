@@ -13,9 +13,7 @@ import { KeyBindEvent } from './enums'
 export const GITHUB_URL = "https://github.com/iosona/SonaClient"
 export const TERMS_OF_USE_URL = "https://github.com/iosona/SonaClient/blob/main/TermsOfUse.txt"
 export const PRIVACY_POLICY_URL = "https://github.com/iosona/SonaClient/blob/main/PrivacyPolicy.txt"
-export const SERVER_URL = import.meta.env.VITE_SERVER_URL
-export const API_KEY = import.meta.env.VITE_SERVER_API_KEY
-export const VERSION = "1.0.3"
+export const VERSION = "1.0.4"
 export const APP_ICON = appIcon;
 
 export const avatarsList: any[] = [

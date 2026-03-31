@@ -7,11 +7,20 @@ import { chmodSync, copyFileSync, existsSync, writeFileSync } from 'fs';
 import path from 'path';
 import { setupUpdater } from './updater';
 import { getLocalizationContext } from './localization';
+import Store from 'electron-store';
+import tcpp from 'tcp-ping'
 
 let mainWindow: BrowserWindow;
 let displayId: string | null = null;
 
 app.commandLine.appendSwitch('ignore-certificate-errors');
+
+const StoreClass = (typeof Store === 'function' ? Store : (Store as any).default);
+const store = new StoreClass<{ servers: any[] }>({
+    defaults: {
+        servers: []
+    }
+});
 
 function integrateAppImage() {
   if (process.platform !== 'linux' || !process.env.APPIMAGE || is.dev) return;
@@ -70,6 +79,43 @@ function initMainIpc() {
     }));
   });
   ipcMain.on('resize', (_, w, h) => mainWindow.setSize(w, h))
+  
+  ipcMain.handle('get-servers', () => {
+      return store.get('servers');
+  });
+
+  ipcMain.handle('save-server', (_, server: any) => {
+      const servers = store.get('servers');
+      const index = servers.findIndex(s => s.id === server.id);
+
+      if (index > -1) {
+          servers[index] = server;
+      } else {
+          const newServer = { ...server, id: Date.now() };
+          servers.push(newServer);
+      }
+      
+      store.set('servers', servers);
+      return servers;
+  });
+
+  ipcMain.handle('delete-server', (_, id: number) => {
+      const servers = store.get('servers').filter(s => s.id !== id);
+      store.set('servers', servers);
+      return servers;
+  });
+
+  ipcMain.handle('check-server', async (_, host: string, port: number) => {
+    return new Promise((resolve) => {
+        tcpp.ping({ address: host, port: port, attempts: 3, timeout: 2000 }, (err, data) => {
+            if (err || isNaN(data.avg)) {
+                resolve(false);
+            } else {
+                resolve(true);
+            }
+        });
+    });
+});
 }
 
 function displayMediaHandler() {
@@ -157,6 +203,8 @@ async function createWindow() {
 }
 
 app.whenReady().then(async () => {
+  await createWindow();
+  
   integrateAppImage();
   setupUpdater(mainWindow);
 
@@ -167,8 +215,6 @@ app.whenReady().then(async () => {
   app.on('browser-window-created', (_, window) => {
     optimizer.watchWindowShortcuts(window)
   })
-
-  await createWindow();
   
   initMainIpc();
   displayMediaHandler();

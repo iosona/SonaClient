@@ -38,3 +38,13 @@ export interface IKeyBind {
     keys: string[];
     action?: () => void;
 }
+
+export interface IServerInfo {
+    id: number
+    name: string
+    ip: string
+    port: number
+    masterPassword?: string;
+    isRemember?: boolean;
+    isAvailable?: boolean;
+}

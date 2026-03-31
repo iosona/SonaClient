@@ -12,7 +12,11 @@ const api = {
   }),
   sendNotify: (title: string, body: string) => ipcRenderer.send('notify', title, body),
   openUrl: (url: string) => shell.openExternal(url),
-  resizeWindow: (w: number, h: number) => ipcRenderer.send('resize', w, h)
+  resizeWindow: (w: number, h: number) => ipcRenderer.send('resize', w, h),
+  saveServer: (server: any) => ipcRenderer.invoke('save-server', server),
+  deleteServer: (id: number) => ipcRenderer.invoke('delete-server', id),
+  getServers: () => ipcRenderer.invoke('get-servers'),
+  pingServer: (host: string, port: number) => ipcRenderer.invoke('check-server', host, port)
 }
 
 if (process.contextIsolated) {

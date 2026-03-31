@@ -1,57 +1,62 @@
-import { API_KEY, SERVER_URL } from '@renderer/constants';
-import { createContext, FC, useEffect, useState } from 'react';
+import { createContext, FC, useState } from 'react';
 import { io, Socket } from 'socket.io-client';
 import { EmitEvent, EventData, EventHandler, SocketContextType } from './SocketProvider.types';
 import { logger } from '@renderer/logger';
+import { IServerInfo } from '@renderer/types';
 
 export const SocketContext = createContext<SocketContextType>({} as SocketContextType);
 
 export const SocketProvider: FC<{ children: React.ReactNode }> = ({ children }) => {
   const [socket, setSocket] = useState<Socket | null>(null);
-
-  useEffect(() => {
-    window.api.getHash()
-      .then(appHash => {
-        setSocket(io(SERVER_URL, {
-          autoConnect: true,
-          query: {
-            apiKey: API_KEY,
-            appHash
-          }
-        }))
-      })
-  }, []);
-
   const [isConnected, setIsConnected] = useState(socket?.connected || false);
-  const [isVerificationError, setIsVerificationError] = useState<boolean>(false);
+  const [isAuthed, setIsAuthed] = useState<boolean>(false);
 
-  useEffect(() => {
+  const disconnectServer = (resetAuth: boolean = false) => {
     if (!socket) return;
-
-    const onConnect = () => {
-      setIsConnected(true);
-      setIsVerificationError(false);
-      logger.success(`Connected to Signal Server: ${socket.id}`);
+    socket.removeAllListeners();
+    socket.close();
+    setSocket(null);
+    if (resetAuth) {
+      setIsAuthed(false);
     }
+  }
 
-    const onDisconnect = () => {
-      setIsConnected(false);
-    }
+  const connectServer = async (serverInfo: IServerInfo): Promise<boolean | undefined> => {
+    disconnectServer();
+    
+    return new Promise((resolve) => {
+      const serverUrl = `http://${serverInfo.ip}:${serverInfo.port}`
+      const ioClient = io(serverUrl, {
+        autoConnect: true,
+        query: {
+          masterPassword: serverInfo.masterPassword
+        }
+      });
 
-    socket.on('connect', onConnect);
-    socket.on("connect_error", (err) => {
-      if (err.message.includes("Client verification error")) {
-        setIsVerificationError(true);
+      const onConnect = () => {
+        setIsConnected(true);
+        setIsAuthed(true);
+        resolve(true);
+        logger.success(`Connected to Signal Server: ${ioClient.id}`);
       }
-    })
-    socket.on('disconnect', onDisconnect);
 
-    return () => {
-      socket.off('connect', onConnect);
-      socket.off('disconnect', onDisconnect);
-      socket.disconnect();
-    }
-  }, [socket]);
+      const onDisconnect = () => setIsConnected(false);
+
+      ioClient.on('connect', onConnect);
+      ioClient.on("connect_error", (err) => {
+        if (err.message.includes("Unauthorized")) {
+          disconnectServer();
+          resolve(undefined);
+        }
+        else {
+          resolve(false);
+        }
+      })
+      ioClient.on('disconnect', onDisconnect);
+
+      setSocket(ioClient);
+    })
+  }
 
   const subscribeEvent = (event: EmitEvent, handler: EventHandler) => {
     if (!isConnected || !socket) return;
@@ -72,10 +77,11 @@ export const SocketProvider: FC<{ children: React.ReactNode }> = ({ children }) 
     <SocketContext.Provider value={{ 
       socket, 
       isConnected,
+      isAuthed,
       subscribeEvent,
       unsubscribeEvent,
       emitEvent,
-      isVerificationError
+      connectServer,
     }}>
       {children}
     </SocketContext.Provider>

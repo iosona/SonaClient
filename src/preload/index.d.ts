@@ -1,4 +1,6 @@
 import { ElectronAPI } from '@electron-toolkit/preload'
+import { IServerInfo } from '@renderer/types';
+import IRC from 'irc-framework';
 
 export interface Api {
   minimize: () => void;
@@ -10,6 +12,10 @@ export interface Api {
   getScreenSources: () => Promise<Electron.DesktopCapturerSource[]>;
   openUrl: (url: string) => void;
   resizeWindow: (w: number, h: number) => void;
+  saveServer: (server: any) => Promise<void>,
+  deleteServer: (id: number) => Promise<void>,
+  getServers: () => Promise<IServerInfo[]>
+  pingServer: (host: string, port: number) => Promise<boolean>
 }
 
 export interface SysInfo {

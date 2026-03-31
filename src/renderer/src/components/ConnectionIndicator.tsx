@@ -11,29 +11,23 @@ const pulse = keyframes`
 `;
 
 const ConnectionIndicator: FC<BoxProps> = (props) => {
-    const { isConnected, isVerificationError } = useSocket();
+    const { isConnected } = useSocket();
     const { t } = useTranslation();
 
-    const statusColor = isVerificationError 
-        ? '#ff99a4'
-        : isConnected 
-            ? '#6ccb5f'
-            : '#ffb900';
+    const statusColor = isConnected 
+        ? '#6ccb5f'
+        : '#ffb900';
 
-    const statusText = isVerificationError 
-        ? t("VerificationError")
-        : isConnected 
-            ? t("Online")
-            : t("Connection");
+    const statusText = isConnected 
+        ? t("Online")
+        : t("Connection");
 
     return (
         <Tooltip 
             arrow
             placement="bottom"
             title={
-                isVerificationError
-                ? t("ClientDidtPassVerification") 
-                : isConnected
+                isConnected
                 ? t("ConnectionEstablished") 
                 : t("ConnectionAttempt")
             }
@@ -61,7 +55,7 @@ const ConnectionIndicator: FC<BoxProps> = (props) => {
                             color: statusColor,
                             fontSize: 10,
                             filter: isConnected ? `drop-shadow(0 0 4px ${statusColor})` : 'none',
-                            animation: !isConnected && !isVerificationError ? `${pulse} 1.5s infinite ease-in-out` : 'none'
+                            animation: !isConnected ? `${pulse} 1.5s infinite ease-in-out` : 'none'
                         }}
                     />
                 </Box>

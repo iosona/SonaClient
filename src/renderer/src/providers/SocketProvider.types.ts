@@ -1,3 +1,4 @@
+import { IServerInfo } from "@renderer/types";
 import { Socket } from "socket.io-client";
 
 export enum EmitStatus {
@@ -24,9 +25,10 @@ export type EventHandler = (status: EmitStatus, data: EventData) => void;
 
 export interface SocketContextType {
   socket: Socket | null;
+  isAuthed: boolean
   isConnected: boolean;
-  isVerificationError: boolean;
   unsubscribeEvent: (event: EmitEvent, handler: EventHandler) => void;
   subscribeEvent: (event: EmitEvent, handler: EventHandler) => void;
   emitEvent: (event: EmitEvent, data: EventData) => void;
+  connectServer: (serverInfo: IServerInfo) => Promise<boolean | undefined>
 }
